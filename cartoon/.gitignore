@@ -3,3 +3,5 @@ build/
 out/*.mp4
 out/sub*/
 graphify-out/
+out/look*/
+out/final/
