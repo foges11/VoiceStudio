@@ -16,7 +16,7 @@
 
 // ------------------------------------------------------------------ head (h = 1)
 /** head half-width: the head is 0.27 h wide at the default head scale */
-export const HEAD_HW = 0.135;
+export const HEAD_HW = 0.148;
 /** crown radius / hw (rounded top) */
 export const HEAD_TOP = 1.06;
 /** jaw radius / hw: a longer lower half gives the egg shape and the chin */
@@ -54,8 +54,8 @@ export type TorsoKind = "block" | "barrel" | "pear";
  *  higher = squarer). block = broad shoulders tapering down, barrel = widest at the middle, pear = widest low. */
 export const TORSO_SHAPES: Record<TorsoKind, { profile: [number, number][]; cross: number }> = {
   block: {
-    profile: [[0, 0], [0.035, 0.66], [0.11, 0.86], [0.3, 0.88], [0.55, 0.93], [0.76, 1.0], [0.88, 0.97], [0.95, 0.74], [1, 0]],
-    cross: 2.9,
+    profile: [[0, 0], [0.035, 0.66], [0.11, 0.86], [0.3, 0.88], [0.55, 0.93], [0.72, 0.98], [0.82, 0.95], [0.9, 0.82], [0.96, 0.56], [1, 0]],
+    cross: 2.45,
   },
   barrel: {
     profile: [[0, 0], [0.045, 0.6], [0.15, 0.87], [0.36, 0.99], [0.56, 1.0], [0.75, 0.93], [0.88, 0.8], [0.95, 0.6], [1, 0]],
@@ -67,8 +67,8 @@ export const TORSO_SHAPES: Record<TorsoKind, { profile: [number, number][]; cros
   },
 };
 /** shoulder joint: height as a fraction of the torso height, and inset from the torso surface */
-export const SHOULDER_T = 0.83;
-export const SHOULDER_IN = 0.78;
+export const SHOULDER_T = 0.8;
+export const SHOULDER_IN = 0.8;
 /** hip joints: height above the torso bottom (fraction of the torso height) and spread (fraction of TORSO_R) */
 export const HIP_T = 0.11;
 export const HIP_X = 0.4;
@@ -79,7 +79,7 @@ export const FOREARM = 0.112;
 /** the arm plane is turned this far toward the front so arms read in 3/4 views (degrees) */
 export const ARM_PLANE_DEG = 9;
 /** sleeve radius at the shoulder and at the wrist */
-export const ARM_R: [number, number] = [0.026, 0.021];
+export const ARM_R: [number, number] = [0.031, 0.021];
 /** pant-leg radius at the hip and at the ankle */
 export const LEG_R: [number, number] = [0.034, 0.027];
 /** hand ball radius; the thumb is THUMB × that */
@@ -99,7 +99,7 @@ export const FACE_SPAN = 1.3;
 export const EYE_X = 0.36;
 export const EYE_Y = -0.03;
 /** open eye: iris half-size (hw) */
-export const IRIS = { rx: 0.092, ry: 0.124 };
+export const IRIS = { rx: 0.104, ry: 0.138 };
 export const BROW_UP = 0.3;
 export const NOSE_Y = 0.3;
 export const MOUTH_Y = 0.62;

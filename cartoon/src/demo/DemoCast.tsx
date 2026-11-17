@@ -30,7 +30,10 @@ export const DemoCast: React.FC<{ mood?: string }> = ({ mood = "day" }) => {
     <AbsoluteFill style={{ background: "#1a1220" }}>
       <View mood={m} cam={cam} t={t} focus={center} blur={0.4} width={1920} height={1080}>
         <M g={boxG(14, 0.1, 8)} c="#c9b89c" tex="planks" p={[0, -0.05, -1]} />
-        <M g={boxG(14, 4, 0.2)} c="#9fb6c8" tex="plaster" p={[0, 2, -3.2]} />
+        <M g={boxG(14, 4, 0.2)} c="#a7c0c3" tex="paper" p={[0, 2, -3.2]} />
+        {/* a painted wainscot and rail: a quiet, cool backdrop that complements the warm floor */}
+        <M g={boxG(14, 0.95, 0.04)} c="#6f9690" tex="planks" p={[0, 0.475, -3.07]} />
+        <M g={boxG(14, 0.07, 0.08)} c="#4d6f6a" tex="wood" p={[0, 0.97, -3.05]} />
         {ROW.map((r) => {
           const c = CAST[r.key];
           return (

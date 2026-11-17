@@ -53,8 +53,8 @@ export const Demo: React.FC<{ mood?: string; wide?: boolean; hero?: boolean }> =
         />
         {shot ? (
           <>
-            <Crate p={shot.fg[0]} s={0.4} yaw={0.4} />
-            <Crate p={shot.fg[1]} s={0.32} yaw={-0.3} />
+            <Crate p={shot.fg[0]} s={0.24} yaw={0.4} />
+            <Crate p={shot.fg[1]} s={0.2} yaw={-0.3} />
           </>
         ) : null}
         <CastLight at={head} cam={cam.pos} mood={m} />
