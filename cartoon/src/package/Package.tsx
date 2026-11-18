@@ -154,7 +154,9 @@ const Wall: React.FC = () => (
     {/* door frame */}
     <M g={boxG(0.08, 2.3, 0.36)} c="#f2ead8" tex="wood" p={[-0.6, P0 + 1.15, -0.12]} />
     <M g={boxG(0.08, 2.3, 0.36)} c="#f2ead8" tex="wood" p={[0.6, P0 + 1.15, -0.12]} />
-    <M g={boxG(1.28, 0.1, 0.36)} c="#f2ead8" tex="wood" p={[0, P0 + 2.3, -0.12]} />
+    {/* lintel: its underside (2.23) sits below the wall piece's (2.25) and above the door top (2.22), and it is
+        deeper than the wall, so no two faces are coplanar (coplanar faces z-fought into a black strip) */}
+    <M g={boxG(1.28, 0.1, 0.38)} c="#f2ead8" tex="wood" p={[0, P0 + 2.28, -0.12]} />
     {/* roof edge */}
     <M g={boxG(10, 0.25, 2.8)} c="#7a3a3a" tex="roofTiles" p={[0, P0 + 4.5, 1.0]} r={[-0.18, 0, 0]} />
     <Window p={[2.1, P0 + 1.5, 0.011]} w={1.0} h={1.2} lit />
