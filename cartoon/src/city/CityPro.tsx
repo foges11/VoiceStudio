@@ -8,7 +8,7 @@ import { useFonts } from "../inkbeat/core/frame";
 
 export type CityProId = "model" | "golden" | "dusk";
 
-type Theme = {
+export type Theme = {
   bg: string;
   slab: [string, string, string];
   road: string;
@@ -39,7 +39,7 @@ type Theme = {
   extra?: React.ReactNode;
 };
 
-const THEMES: Record<CityProId, Theme> = {
+export const THEMES: Record<CityProId, Theme> = {
   model: {
     bg: "linear-gradient(#eef1f4, #dfe4ea 55%, #cfd6de)",
     slab: ["#f7f7f5", "#e2e2de", "#d2d2cd"],
@@ -331,7 +331,7 @@ const Crane: React.FC<{ t: Theme }> = ({ t }) => {
 };
 
 // ------------------------------------------------------------------ the HUD (clean, broadcast style; top 80%, left of IG buttons)
-const Hud: React.FC<{ t: Theme }> = ({ t }) => {
+export const Hud: React.FC<{ t: Theme }> = ({ t }) => {
   const h = t.hud;
   return (
     <AbsoluteFill style={{ fontFamily: "Poppins" }}>

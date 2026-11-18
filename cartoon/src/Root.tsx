@@ -6,6 +6,7 @@ import { DemoMove, MOVE_FRAMES } from "./demo/DemoMove";
 import { SUB } from "./inkbeat/core/frame";
 import { CityLook } from "./city/CityLooks";
 import { CityPro } from "./city/CityPro";
+import { CityReal } from "./city/CityReal";
 import { DURATION, LOOK_TIMES, PackageLook, PackageSheet, PackageShort } from "./package/Package";
 
 // DemoHero: a low hero framing with foreground props. Demo: one still. Demo-<mood>: the same frame in each act light. DemoWide: the whole set.
@@ -25,6 +26,9 @@ export const Root: React.FC = () => (
     <Composition id="Package" component={PackageShort} durationInFrames={DURATION} fps={30} width={1080} height={1920} defaultProps={{ sub: false }} />
     <Composition id="PackageLook" component={PackageLook} durationInFrames={1} fps={30} width={1080} height={1920} defaultProps={{ at: 1 }} />
     <Composition id="PackageSheet" component={PackageSheet} durationInFrames={LOOK_TIMES.length} fps={30} width={1080} height={1920} />
+    {(["empty", "built"] as const).map((l) => (
+      <Composition key={l} id={`CityReal-${l}`} component={CityReal} durationInFrames={1} fps={30} width={1080} height={1920} defaultProps={{ look: l }} />
+    ))}
     {(["model", "golden", "dusk"] as const).map((l) => (
       <Composition key={l} id={`CityPro-${l}`} component={CityPro} durationInFrames={1} fps={30} width={1080} height={1920} defaultProps={{ look: l }} />
     ))}
