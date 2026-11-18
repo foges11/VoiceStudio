@@ -1,30 +1,41 @@
 # What If A Package Arrived With Tomorrow's Date On It?
 
 Narration for the 34-second silent cut (`out/final/package.mp4`). Each line starts on the time shown; the picture
-changes on that line. Read at a steady, low, slightly ominous pace (about 170 words a minute). Let the last line land
+changes on that line. The narration is in second person. Read at a steady, low, slightly ominous pace (about 170 words a minute). Let the last line land
 with a beat of silence: the video loops back to the box on the doormat.
 
 | Start | Line | What's on screen |
 |---|---|---|
-| 0:00 | The package was delivered tomorrow. | The box on the doormat, label "DELIVERED: TOMORROW" |
-| 0:02 | But it was already sitting on his doorstep today. | The door opens; Milo sees it |
-| 0:04.6 | Inside was one photo of something that hasn't happened yet. | He opens it; push into the photo |
-| 0:07.8 | Him, on this porch, soaking wet, holding this exact box. | Inside the photo: Milo soaked, holding the box at night |
+| 0:00 | This box arrives tomorrow at 7:02 PM. So why is it on your doorstep before you ordered it? | The box on the doormat, label "DELIVERED: TOMORROW"; the door opens |
+| 0:06.0 | Inside: one photo of something that hasn't happened yet. | He opens it; push into the photo |
+| 0:07.8 | You, on this porch, soaking wet, holding this exact box. | Inside the photo: Milo soaked, holding the box at night |
 | 0:11.4 | Tomorrow. 7:02 PM. | Push in; the date and time written on the photo |
-| 0:13.2 | So he did the one thing that would break it. | Close-up, determined |
-| 0:15.8 | He waded into a lake and threw the box as far as he could. | Waist-deep in a lake at dusk; the throw, the splash |
-| 0:19.6 | He got home at 7:01. The porch was empty. | Clock "7:01 PM"; the empty doormat |
-| 0:23.0 | Then his phone buzzed. One new delivery. | Phone: "1 NEW DELIVERY"; his face |
-| 0:26.0 | He opened the door, and there it was. Dripping wet. | The box back on the mat, soaked; a camera flash |
-| 0:29.8 | And the handwriting on the label was his own. | "FROM: MILO" on the box, his mailbox behind it |
+| 0:13.2 | So you do the one thing that would break it. | Close-up, determined |
+| 0:15.8 | You wade into a lake and throw the box as far as you can. | Waist-deep in a lake at dusk; the throw, the splash |
+| 0:19.6 | You get home at 7:01. The porch is empty. | Clock "7:01 PM"; the empty doormat |
+| 0:23.0 | Then your phone buzzes. One new delivery. | Phone: "1 NEW DELIVERY"; his face |
+| 0:26.0 | You open the door, and there it is. Dripping wet. | The box back on the mat, soaked; a camera flash |
+| 0:29.8 | And the handwriting on the label is your own. | "FROM: MILO" on the box, his mailbox behind it |
 
-Plain script (96 words):
+Plain script (99 words):
 
-> The package was delivered tomorrow. But it was already sitting on his doorstep today. Inside was one photo of
-> something that hasn't happened yet. Him, on this porch, soaking wet, holding this exact box. Tomorrow. 7:02 PM.
-> So he did the one thing that would break it. He waded into a lake and threw the box as far as he could. He got
-> home at 7:01. The porch was empty. Then his phone buzzed. One new delivery. He opened the door, and there it was.
-> Dripping wet. And the handwriting on the label was his own.
+> This box arrives tomorrow at 7:02 PM. So why is it on your doorstep before you ordered it? Inside: one photo of
+> something that hasn't happened yet. You, on this porch, soaking wet, holding this exact box. Tomorrow. 7:02 PM.
+> So you do the one thing that would break it. You wade into a lake and throw the box as far as you can. You get
+> home at 7:01. The porch is empty. Then your phone buzzes. One new delivery. You open the door, and there it is.
+> Dripping wet. And the handwriting on the label is your own.
+
+Hook, scored with `/yt-script`'s `hookscore.py` (0-100; the old hook scored 36):
+
+| Hook | Score | Formula |
+|---|---|---|
+| **This box arrives tomorrow at 7:02 PM. So why is it on your doorstep before you ordered it?** | 71 | The Question |
+| Runner-up: This box arrives tomorrow at 7:02 PM. So why is it on your doorstep, and why can't you stop it? | 71 | The Question |
+| Old: The package was delivered tomorrow. But it was already sitting on his doorstep today. | 36 | none |
+
+The winner names an exact time (specific), speaks to "you" (the narration is now second person, as the top "what
+if" channels do), and opens a question the viewer can't close. "Before you ordered it" also plants the ending: you
+never ordered it, you sent it.
 
 ## Why it's built this way (from the research)
 
