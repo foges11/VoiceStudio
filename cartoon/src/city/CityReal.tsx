@@ -92,7 +92,7 @@ const Cam: React.FC<{ pos: [number, number, number]; look: [number, number, numb
 
 type Car = { p: [number, number, number]; yaw: number; c: string };
 
-const CityImpl: React.FC<{ built: boolean; suburbs?: [number, number][] }> = ({ built, suburbs = [] }) => {
+const CityImpl: React.FC<{ built: boolean; suburbs?: [number, number][]; lowRise?: [number, number][] }> = ({ built, suburbs = [], lowRise = [] }) => {
   const m = useMemo(() => {
     const asphalt = new THREE.MeshStandardMaterial({ map: asphaltTex(), roughness: 0.95 });
     (asphalt.map as THREE.Texture).wrapS = (asphalt.map as THREE.Texture).wrapT = THREE.RepeatWrapping;
@@ -202,7 +202,8 @@ const CityImpl: React.FC<{ built: boolean; suburbs?: [number, number][] }> = ({ 
             const roll = r();
             if (built && roll < 0.55) {
               const tm = towers[Math.floor(r() * towers.length)];
-              const h = 2 + Math.pow(r(), 2) * 9;
+              const hh = 2 + Math.pow(r(), 2) * 9;
+              const h = lowRise.some(([lx2, lz2]) => lx2 === bx && lz2 === bz) ? 0.6 + hh * 0.12 : hh;
               const fw = ls * (0.6 + r() * 0.3);
               box(`t${kk}`, tm, [lx, 0.18 + h / 2, lz], [fw, h, fw]);
               box(`tr${kk}`, m.curb, [lx, 0.18 + h + 0.08, lz], [fw * 0.8, 0.16, fw * 0.8]);
