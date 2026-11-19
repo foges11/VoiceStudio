@@ -44,3 +44,64 @@ Recommended first upload: #1. It's concrete, true, easy to animate, and has thre
 2. Write the script with /yt-script: five hooks, scored, keep the best.
 3. Write titles and the thumbnail with /yt-package; the description with /yt-seo.
 4. After posting, read the retention export with /yt-retention and fix the next video.
+
+## Research: what's working (yt-viral, November 2026)
+
+436 recent long-form videos from 11 animated self-improvement, psychology, money and economics channels (Better Than
+Yesterday, Two Cents, The Swedish Investor, Psych2Go, Productivity Game, Money & Macro, Economics Explained, The Plain
+Bagel, Improvement Pill, Joseph Everett - WIL, Business Casual), ranked by views over each channel's own median.
+
+Top outliers:
+
+| Multiple | Views | Channel | Title |
+|---|---|---|---|
+| 78x | 28M | Better Than Yesterday | How I Tricked My Brain To Like Doing Hard Things |
+| 40x | 962K | Improvement Pill | How To Read Body Language |
+| 34x | 5.3M | The Swedish Investor | The Intelligent Investor's Road to $1,000,000 |
+| 20x | 11M | Joseph Everett - WIL | How Japan escaped Obesity while America got Fat |
+| 19x | 6.8M | Better Than Yesterday | Use Laziness To Your Advantage - The 20 Second Rule |
+| 15x | 5.3M | Better Than Yesterday | Why You Can't FOCUS - And How To Fix That |
+| 14x | 2.1M | The Swedish Investor | Warren Buffett: 12 Mistakes Every Investor Makes |
+
+Money-topic outliers: Road to $1,000,000 (34x), 12 Mistakes Every Investor Makes (14x), How Rich People Hide Their
+Money (2.1x), The WORST Financial Advice on the Internet (2.7x).
+
+**What they share:** a problem the viewer has, explained by how their brain works, with a fix promised in the title
+("How I tricked my brain…", "Why you can't focus - and how to fix that", "Use laziness to your advantage"). About
+half the outlier titles are questions ("Why…", "How…"). The formula labels judge the title wording only; they don't
+explain why a video worked.
+
+## Revised first five (built on that pattern)
+
+| Week | Title | title.py | The one thing it promises |
+|---|---|---|---|
+| 1 | Why $9.99 Works on Your Brain | 100 | Why prices ending in 9 trick you, and how to see through it |
+| 2 | How To Trick Your Brain Into Saving Money | 76 | Saving feels impossible because of how your brain weighs now vs later; here's the workaround |
+| 3 | Why You're Always Broke - And How To Fix It | 76 | It's usually not your income; it's three habits your brain defaults to |
+| 4 | Why You Spend More With a Card (And How To Stop) | 76 | The "pain of paying" disappears with a card, and what brings it back |
+| 5 | Why Lottery Winners Go Broke | 90 | A story video about what sudden money does to decisions (no unverified "70%" figure) |
+
+(title.py marks the longer titles down for the mobile cut; the outliers above are just as long and did fine, so
+treat that as a nudge, not a rule.)
+
+## The weekly plan (yt-plan)
+
+| Day | Format | What | What already exists |
+|---|---|---|---|
+| Mon | Research + script | Sources, /yt-script hooks scored, final script | This plan, the title |
+| Tue | Voice-over | Record (0.5 s of silence before the first word) | The script |
+| Wed–Thu | Animation | Build and render the 2D video to your voice; review stills | The voice-over, the template |
+| Fri | Upload the anchor | Long video, title, thumbnail, description, pinned comment | The render |
+| Sat | Short 1 | The strongest standalone moment, new hook | The long video |
+| Sun | Short 2 | A second moment | The long video |
+| Next Tue | Short 3 | The "try this" tip moment | The long video |
+
+Posting day: replace Friday with whatever day your own analytics show as best (YouTube Studio → Analytics →
+Audience → "When your viewers are on YouTube").
+
+Optional "cheap one" (yt-plan's suggestion): a short reply to the most-replied comment of the week. Skip it until the
+weekly rhythm is steady.
+
+Honest time cost (an estimate, not a measurement): about 8–12 hours of your time a week (writing and recording about 4 h,
+reviewing the animation 2–3 h, uploading and clips 2–3 h). If the week goes wrong, drop Short 3 first, then Short 2.
+Never drop the anchor.
