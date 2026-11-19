@@ -30,7 +30,19 @@ and Mayor Bob.
 
 - The most-liked comment at posting time + 24 h happens. Ties go to the earliest.
 - Commenters become citizens: their @ goes on a house. If a disaster hits their street, they're out.
-- Population starts at 100. If it hits 0, the city "ends" (the season finale), then Season 2.
+- Population starts at 100. It can grow (new commenters, good comments) or shrink (disasters). At 0, the season ends.
+
+## What happens when people die
+
+- **Population can grow:** each day, new commenters move in as citizens (their @ on a house), and good comments add
+  people too (a hospital, a baby boom). If more people comment than die, the city grows.
+- **No disaster wipes out everyone at once:** a disaster hits one part of the city (about 10–40%). The second
+  most-liked comment can be a rescue ("Bob builds a shield"), so rescuers compete with destroyers.
+- **If it hits 0, that's the season finale:** "Day N: The comments destroyed this city." The last citizen, Bob alone
+  on the steps, a memorial wall with every citizen's @ (the most shareable episode), and a villain statue for the
+  commenter who finished it off.
+- **Season 2 rebuilds from the ruins:** the same city in ruins, Bob survives (he never dies; he's the show's face),
+  new citizens move in, and the crowd decides whether to rebuild or repeat history.
 
 ## Variety (so it never repeats)
 
