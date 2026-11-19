@@ -41,21 +41,18 @@ const GULP: Cam = { pos: [BOB[0] + 0.95, 0.55, BOB[2] + 1.25], look: [BOB[0], BO
 const camAt = (t: number): Cam => {
   if (t < 1.65) return mixCam(SIGN, SIGN_IN, ramp(t, 0, 1.65)); // "100 people can't stop you."
   if (t < 4.3) {
-    // "You run this town now. What happens first?": rise over the sign into the town square
-    const u = ramp(t, 1.65, 4.2);
-    const lift: V3 = [SIGN_AT[0] + 2, 9, SIGN_AT[2] + 2];
-    const pos = u < 0.5 ? mixV(SIGN_IN.pos, lift, ease(u * 2)) : mixV(lift, SQUARE.pos, ease(u * 2 - 1));
-    return { pos, look: mixV(SIGN_IN.look, SQUARE.look, ease(u)), fov: lerp(48, 40, u) };
+    // "You run this town now. What happens first?": cut to a high view over the town, slowly settling toward the square
+    const u = ramp(t, 1.65, 4.3);
+    return mixCam({ pos: [16, 13, 22], look: [1, 0, 3], fov: 42 }, SQUARE, u);
   }
   if (t < 6.0) return mixCam(SQUARE, SQUARE2, ramp(t, 4.3, 6.0)); // "Welcome to Mobville."
   if (t < 9.8) return mixCam(BOB1, BOB2, ramp(t, 6.0, 9.8)); // "This is Mayor Bob, and he has to obey…"
   if (t < 12.7) return mixCam(PREV1, PREV2, ramp(t, 9.8, 12.7)); // "A pool party? 50 pandas? A meteor?"
   if (t < 13.95) return mixCam(GULP, { ...GULP, pos: add(GULP.pos, [-0.12, 0, -0.15]) }, ramp(t, 12.7, 13.95)); // "Even the meteor."
-  // "Comment your first law. Tomorrow, it happens to these 100 people.": up and out, back to the sign (= frame 0)
-  const u = ramp(t, 13.95, 17.7);
-  const mid: V3 = [12, 10, 22];
-  const pos = u < 0.45 ? mixV(GULP.pos, mid, ease(u / 0.45)) : mixV(mid, SIGN.pos, ease((u - 0.45) / 0.55));
-  return { pos, look: mixV(GULP.look, SIGN.look, ease(u)), fov: lerp(30, SIGN.fov, ease(u)) };
+  // "Comment your first law.": stay on Bob, easing back a little while the comment box types
+  if (t < 15.55) return mixCam({ ...GULP, pos: add(GULP.pos, [-0.12, 0, -0.15]) }, BOB1, ramp(t, 13.95, 15.55));
+  // "Tomorrow, it happens to these 100 people.": cut to the sign, a slow pull back to the opening frame (it loops)
+  return mixCam(SIGN_IN, SIGN, ramp(t, 15.55, 17.9));
 };
 function add(a: V3, b: V3): V3 {
   return [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
