@@ -117,13 +117,13 @@ const PEOPLE: Person[] = (() => {
   return out;
 })();
 
-const Citizens: React.FC<{ t: number }> = ({ t }) => {
+const Citizens: React.FC<{ t: number; wave?: number }> = ({ t, wave = 0 }) => {
   const m = useMemo(() => {
     const skin = new THREE.MeshStandardMaterial({ color: "#f1c7a3", roughness: 0.8 });
     const bodies = new Map<string, THREE.MeshStandardMaterial>();
     return { skin, body: (c: string) => bodies.get(c) ?? (bodies.set(c, new THREE.MeshStandardMaterial({ color: c, roughness: 0.7 })), bodies.get(c)!) };
   }, []);
-  const g = useMemo(() => ({ body: new THREE.CapsuleGeometry(0.045, 0.1, 4, 10), head: new THREE.SphereGeometry(0.042, 14, 10) }), []);
+  const g = useMemo(() => ({ body: new THREE.CapsuleGeometry(0.045, 0.1, 4, 10), head: new THREE.SphereGeometry(0.042, 14, 10), arm: new THREE.CapsuleGeometry(0.012, 0.06, 4, 6) }), []);
   // they walk, the shadow arrives, they stop and look up (and stay that way: they're scared now)
   const stop = ramp(t, 0.5, 1.2);
   const look = ramp(t, 0.7, 1.5);
@@ -137,6 +137,9 @@ const Citizens: React.FC<{ t: number }> = ({ t }) => {
           <group key={i} position={[x, q.p[1] + bob, q.p[2]]}>
             <mesh geometry={g.body} material={m.body(q.c)} position={[0, 0.095, 0]} castShadow />
             <mesh geometry={g.head} material={m.skin} position={[0, 0.215 + 0.008 * look, -0.012 * look]} castShadow />
+            {wave > 0 && i % 3 !== 2 ? (
+              <mesh geometry={g.arm} material={m.body(q.c)} position={[0.05, 0.19, 0]} rotation={[0, 0, -2.6 + Math.sin(t * 8 + i) * 0.35 * wave]} castShadow />
+            ) : null}
           </group>
         );
       })}
@@ -145,7 +148,7 @@ const Citizens: React.FC<{ t: number }> = ({ t }) => {
 };
 
 // ------------------------------------------------------------------ Mayor Bob: a slightly bigger citizen with a top hat and a sash
-const MayorBob: React.FC<{ t: number; yaw?: number }> = ({ t, yaw = 0.55 }) => {
+const MayorBob: React.FC<{ t: number; yaw?: number; happy?: number }> = ({ t, yaw = 0.55, happy = 0 }) => {
   const m = useMemo(
     () => ({
       suit: new THREE.MeshStandardMaterial({ color: "#2b3446", roughness: 0.6 }),
@@ -170,6 +173,7 @@ const MayorBob: React.FC<{ t: number; yaw?: number }> = ({ t, yaw = 0.55 }) => {
       eyeP: new THREE.SphereGeometry(0.009, 10, 8),
       box: new THREE.BoxGeometry(1, 1, 1),
       drop: new THREE.SphereGeometry(0.011, 10, 8),
+      smile: new THREE.TorusGeometry(0.02, 0.004, 6, 16, Math.PI),
     }),
     [],
   );
@@ -190,12 +194,16 @@ const MayorBob: React.FC<{ t: number; yaw?: number }> = ({ t, yaw = 0.55 }) => {
       {[-1, 1].map((s) => (
         <group key={s} position={[s * 0.025, 0.325, 0.058]}>
           <mesh geometry={g.eyeW} material={m.white} />
-          <mesh geometry={g.eyeP} material={m.eye} position={[0, 0.006, 0.013]} />
+          <mesh geometry={g.eyeP} material={m.eye} position={[0, happy > 0.5 ? 0 : 0.006, 0.013]} />
         </group>
       ))}
-      <mesh geometry={g.box} material={m.eye} position={[0, 0.288, 0.064]} rotation={[0, 0, Math.PI]} scale={[0.026, 0.006, 0.004]} />
+      {happy > 0.5 ? (
+        <mesh geometry={g.smile} material={m.eye} position={[0, 0.295, 0.062]} rotation={[0, 0, Math.PI]} />
+      ) : (
+        <mesh geometry={g.box} material={m.eye} position={[0, 0.288, 0.064]} rotation={[0, 0, Math.PI]} scale={[0.026, 0.006, 0.004]} />
+      )}
       {/* sweat */}
-      <mesh geometry={g.drop} material={m.sweat} position={[0.055, sweatY + 0.06, 0.035]} scale={[1, 1.4, 1]} />
+      <mesh visible={happy < 0.5} geometry={g.drop} material={m.sweat} position={[0.055, sweatY + 0.06, 0.035]} scale={[1, 1.4, 1]} />
       {/* arms: left at the side, right waving */}
       <mesh geometry={g.arm} material={m.suit} position={[-0.085, 0.14, 0]} rotation={[0, 0, 0.15]} castShadow />
       <group position={[0.08, 0.2, 0]} rotation={[0, 0, lerp(-0.15, -2.5, armUp) + wave]}>
@@ -321,7 +329,7 @@ const Hud: React.FC<{ t: number }> = ({ t }) => {
   );
 };
 
-export { MayorBob, LOW };
+export { MayorBob, LOW, Citizens, PEOPLE };
 export const MobRuleDay1: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
   const ready = useFonts();
   const t = useCurrentFrame() / MOB1_FPS;

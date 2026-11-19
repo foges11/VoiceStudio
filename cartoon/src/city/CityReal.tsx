@@ -92,7 +92,7 @@ const Cam: React.FC<{ pos: [number, number, number]; look: [number, number, numb
 
 type Car = { p: [number, number, number]; yaw: number; c: string };
 
-const CityImpl: React.FC<{ built: boolean; suburbs?: [number, number][]; lowRise?: [number, number][] }> = ({ built, suburbs = [], lowRise = [] }) => {
+const CityImpl: React.FC<{ built: boolean; suburbs?: [number, number][]; lowRise?: [number, number][]; town?: boolean }> = ({ built, suburbs = [], lowRise = [], town = false }) => {
   const m = useMemo(() => {
     const asphalt = new THREE.MeshStandardMaterial({ map: asphaltTex(), roughness: 0.95 });
     (asphalt.map as THREE.Texture).wrapS = (asphalt.map as THREE.Texture).wrapT = THREE.RepeatWrapping;
@@ -101,8 +101,8 @@ const CityImpl: React.FC<{ built: boolean; suburbs?: [number, number][]; lowRise
     lotTex.wrapS = lotTex.wrapT = THREE.RepeatWrapping;
     return {
       asphalt,
-      walk: std("#d8d4ca", 0.9),
-      curb: std("#eeebe4", 0.8),
+      walk: std(town ? "#e7d5bb" : "#d8d4ca", 0.9),
+      curb: std(town ? "#f4e8d4" : "#eeebe4", 0.8),
       lot: new THREE.MeshStandardMaterial({ map: lotTex, roughness: 1 }),
       zone: std("#ffffff", 0.6),
       line: std("#f4f4ee", 0.6),
@@ -114,19 +114,33 @@ const CityImpl: React.FC<{ built: boolean; suburbs?: [number, number][]; lowRise
       pole: std("#5d636d", 0.5, 0.4),
       hallWall: std("#f3eee3", 0.8),
       hallTrim: std("#e2d8c4", 0.8),
-      dome: std("#5b8fbf", 0.5, 0.2),
+      dome: std(town ? "#e0674e" : "#5b8fbf", 0.5, 0.2),
       plaza: std("#e8e2d4", 0.9),
       water: std("#4aa3d8", 0.25, 0.1),
-      field: std("#86c25c", 1),
+      field: std(town ? "#9bd166" : "#86c25c", 1),
+      roofs: ["#c8553d", "#3d5a80", "#7a4b3a", "#2f6f6a", "#b5523b"].map((c) => std(c, 0.75)),
+      flower: ["#ff7a8a", "#ffd166", "#ffffff", "#c38dff"].map((c) => std(c, 0.8)),
     };
-  }, []);
+  }, [town]);
+  if (town) (m.asphalt as THREE.MeshStandardMaterial).color.set("#e8ddd2");
   const geo = useMemo(
     () => ({
       box: new THREE.BoxGeometry(1, 1, 1),
       cyl: new THREE.CylinderGeometry(0.5, 0.5, 1, 12),
       sph: new THREE.SphereGeometry(0.5, 14, 10),
       dome: new THREE.SphereGeometry(0.5, 24, 12, 0, Math.PI * 2, 0, Math.PI / 2),
+      roof: new THREE.ConeGeometry(0.7071, 1, 4, 1),
     }),
+    [],
+  );
+  const houses = useMemo(
+    () =>
+      ["#f7c6a3", "#bfe3d0", "#ffe39a", "#c9dcf7", "#f5b8c4", "#f3efe6"].map((w, i) => {
+        const t = windowTex(w, "#4a5d73", 31 + i);
+        t.wrapS = t.wrapT = THREE.RepeatWrapping;
+        t.repeat.set(1, 0.35);
+        return new THREE.MeshStandardMaterial({ map: t, roughness: 0.8 });
+      }),
     [],
   );
   const towers = useMemo(() => {
@@ -200,7 +214,33 @@ const CityImpl: React.FC<{ built: boolean; suburbs?: [number, number][]; lowRise
             const kk = `${k}-${i}${j}`;
             box(`lot${kk}`, m.lot, [lx, 0.17, lz], [ls, 0.03, ls]);
             const roll = r();
-            if (built && roll < 0.55) {
+            if (built && town) {
+              // a small-town lot: two or three little houses with pitched roofs, or a garden
+              if (roll < 0.78) {
+                const n = roll < 0.3 ? 3 : 2;
+                for (let q = 0; q < n; q++) {
+                  const hm = houses[Math.floor(r() * houses.length)];
+                  const hw = ls / n - 0.25;
+                  const hd = ls * (0.45 + r() * 0.15);
+                  const hh = 0.55 + r() * 0.45;
+                  const hx = lx - ls / 2 + (q + 0.5) * (ls / n);
+                  const hz = lz - ls * 0.12;
+                  box(`ho${kk}${q}`, hm, [hx, 0.18 + hh / 2, hz], [hw, hh, hd]);
+                  parts.push(
+                    <mesh key={`rf${kk}${q}`} geometry={geo.roof} material={m.roofs[Math.floor(r() * m.roofs.length)]} position={[hx, 0.18 + hh + hw * 0.32, hz]} rotation={[0, Math.PI / 4, 0]} scale={[hw * 0.78, hw * 0.64, hd * 0.78]} castShadow receiveShadow />,
+                  );
+                  box(`dr${kk}${q}`, m.trunk, [hx, 0.18 + 0.17, hz + hd / 2 + 0.01], [0.16, 0.34, 0.02]);
+                }
+              } else {
+                for (let q = 0; q < 6; q++) {
+                  const fx = lx + (r() - 0.5) * ls * 0.8;
+                  const fz = lz + (r() - 0.5) * ls * 0.8;
+                  parts.push(<mesh key={`fl${kk}${q}`} geometry={geo.sph} material={m.flower[q % m.flower.length]} position={[fx, 0.22, fz]} scale={[0.35, 0.18, 0.35]} castShadow />);
+                }
+                parts.push(<mesh key={`gt${kk}`} geometry={geo.sph} material={m.leafA} position={[lx, 0.9, lz]} scale={[1.3, 1.1, 1.3]} castShadow />);
+                parts.push(<mesh key={`gtt${kk}`} geometry={geo.cyl} material={m.trunk} position={[lx, 0.45, lz]} scale={[0.14, 0.6, 0.14]} castShadow />);
+              }
+            } else if (built && roll < 0.55) {
               const tm = towers[Math.floor(r() * towers.length)];
               const hh = 2 + Math.pow(r(), 2) * 9;
               const h = lowRise.some(([lx2, lz2]) => lx2 === bx && lz2 === bz) ? 0.6 + hh * 0.12 : hh;

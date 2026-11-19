@@ -101,3 +101,36 @@ Scores:
 **Pinned comment:** Top comment decides Day 2. Your @ goes on a house. What hits them first?
 
 Record the voice-over with about 0.5 s of silence before the first word.
+
+## Day 1, version 2 (welcoming, introduces the show)
+
+The first cut didn't say what the show was and looked like Brand City. Version 2 introduces the town, the mayor and the
+rule, in Mob Rule's own look: Mobville, a warm golden-hour small town (pastel houses, pitched roofs, gardens), a
+wooden "Welcome to Mobville, Pop. 100" sign, waving citizens, a smiling Mayor Bob, a town badge and cream caption pills.
+
+> 100 people can't stop you.
+> You run this town now. What happens first?
+> Welcome to Mobville.
+> This is Mayor Bob, and he has to obey the top comment every single day.
+> A pool party? 50 pandas? A meteor?
+> Even the meteor.
+> Comment your first law.
+> Tomorrow, it happens to these 100 people.
+
+| Time | Voice | On screen |
+|---|---|---|
+| 0:00 | 100 people can't stop you. | The "Welcome to Mobville, Pop. 100" sign, the town behind it at golden hour |
+| 0:01.8 | You run this town now. What happens first? | Rise over the sign into the town; citizens in the square look up and wave at the camera (at you) |
+| 0:04.7 | Welcome to Mobville. | The town square, Town Hall's red dome, people waving |
+| 0:05.8 | This is Mayor Bob, and he has to obey the top comment every single day. | Bob smiling and waving; on "obey the top comment" a comment card pops up beside him and his smile drops |
+| 0:11.3 | A pool party? 50 pandas? A meteor? | Three quick previews: a pool party with balloons, pandas waddling down Main Street, a meteor glow in the sky |
+| 0:13.8 | Even the meteor. | Bob gulps (the sweat drop) |
+| 0:14.9 | Comment your first law. | A comment box: "Write the first law..." with a blinking cursor |
+| 0:16.4 | Tomorrow, it happens to these 100 people. | Back out to the welcome sign (it loops) |
+
+Scores:
+- Hook "100 people can't stop you.": /ig-reel 100 STRONG. With "You run this town now. What happens first?":
+  /ig-reel 88 STRONG, /yt-script 70.
+- Beat sheet: 48 words, about 18.9 s at 165 wpm; loops (the end repeats "100 people"). One long beat (Bob's line),
+  which changes picture halfway (the comment card).
+- /ig-human: 88.9 PASS.
