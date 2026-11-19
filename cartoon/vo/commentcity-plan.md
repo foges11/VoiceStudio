@@ -1,6 +1,7 @@
-# MOB RULE: the crowd controls the city
+# COMMENT CITY: the crowd controls the city
 
-**Name:** Mob Rule (series), "Mob Rule: Day N" (titles). Handle ideas: @mobrule.city, @mobrulecity.
+**Name:** Comment City (series), "Comment City: Day N" (titles). Handle ideas: @commentcity, @commentcity.daily.
+(First drafted as "Mob Rule"; renamed for clarity.)
 
 **One-line pitch:** a tiny city of 100 people and their mayor. Every day, the most-liked comment happens to them,
 no matter what.
@@ -10,7 +11,7 @@ and Mayor Bob.
 
 ## Why this beats Brand City (from Episode 0's data)
 
-| Episode 0's problem | Mob Rule's fix |
+| Episode 0's problem | Comment City's fix |
 |---|---|
 | 43.5% skip rate: the opening looked like a game ad | Something happens in frame 0 (a shadow over the city, people looking up) with a character on screen |
 | A cliff at 7–9 s when the rules started | One rule, one line: "Top comment happens." |
