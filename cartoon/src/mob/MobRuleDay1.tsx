@@ -30,8 +30,9 @@ const WALK_Y = 0.16; // sidewalk top
 const STREET_Z = 4.6; // the road just south of City Hall
 const BOB: V3 = [0.95, 0.2, 1.75]; // on the plaza, beside the pool
 
+// a calm, low city: every block is low-rise (houses and small buildings); no skyscrapers
 const LOW: [number, number][] = [];
-for (let bx = 2; bx <= 6; bx++) for (let bz = 2; bz <= 6; bz++) LOW.push([bx, bz]);
+for (let bx = 0; bx <= 6; bx++) for (let bz = 0; bz <= 6; bz++) LOW.push([bx, bz]);
 
 // ------------------------------------------------------------------ camera
 type Cam = { pos: V3; look: V3; fov: number };
@@ -144,7 +145,7 @@ const Citizens: React.FC<{ t: number }> = ({ t }) => {
 };
 
 // ------------------------------------------------------------------ Mayor Bob: a slightly bigger citizen with a top hat and a sash
-const MayorBob: React.FC<{ t: number }> = ({ t }) => {
+const MayorBob: React.FC<{ t: number; yaw?: number }> = ({ t, yaw = 0.55 }) => {
   const m = useMemo(
     () => ({
       suit: new THREE.MeshStandardMaterial({ color: "#2b3446", roughness: 0.6 }),
@@ -178,7 +179,7 @@ const MayorBob: React.FC<{ t: number }> = ({ t }) => {
   const sweatY = 0.26 - ((t * 0.12) % 0.06); // a drop sliding down, on a loop
   const shake = t > 8.3 && t < 9.4 ? Math.sin(t * 60) * 0.002 : 0;
   return (
-    <group position={[BOB[0] + shake, BOB[1], BOB[2]]} rotation={[0, 0.55, 0]}>
+    <group position={[BOB[0] + shake, BOB[1], BOB[2]]} rotation={[0, yaw, 0]}>
       <mesh geometry={g.body} material={m.suit} position={[0, 0.14, 0]} castShadow />
       <mesh geometry={g.box} material={m.sash} position={[0, 0.15, 0.066]} rotation={[0, 0, 0.75]} scale={[0.03, 0.2, 0.012]} />
       <mesh geometry={g.box} material={m.gold} position={[0.032, 0.115, 0.074]} scale={[0.022, 0.022, 0.01]} />
@@ -320,6 +321,7 @@ const Hud: React.FC<{ t: number }> = ({ t }) => {
   );
 };
 
+export { MayorBob, LOW };
 export const MobRuleDay1: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
   const ready = useFonts();
   const t = useCurrentFrame() / MOB1_FPS;
