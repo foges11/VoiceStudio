@@ -12,15 +12,15 @@ import { useFonts } from "../inkbeat/core/frame";
 export type CityRealId = "empty" | "built";
 
 // ------------------------------------------------------------------ layout (metres)
-const BLOCK = 7; // block size, curb to curb
-const ROAD = 2.2; // road width including nothing else
-const WALK = 0.45; // sidewalk width inside each block
-const PITCH = BLOCK + ROAD;
-const NB = 7; // blocks per side
-const HALF = (NB * PITCH) / 2;
+export const BLOCK = 7; // block size, curb to curb
+export const ROAD = 2.2; // road width including nothing else
+export const WALK = 0.45; // sidewalk width inside each block
+export const PITCH = BLOCK + ROAD;
+export const NB = 7; // blocks per side
+export const HALF = (NB * PITCH) / 2;
 const HALL = [3, 3]; // the civic block
 
-const rng = (seed: number) => () => {
+export const rng = (seed: number) => () => {
   seed = (seed * 16807) % 2147483647;
   return (seed - 1) / 2147483646;
 };
@@ -92,7 +92,7 @@ const Cam: React.FC<{ pos: [number, number, number]; look: [number, number, numb
 
 type Car = { p: [number, number, number]; yaw: number; c: string };
 
-const City: React.FC<{ built: boolean }> = ({ built }) => {
+const CityImpl: React.FC<{ built: boolean; suburbs?: [number, number][] }> = ({ built, suburbs = [] }) => {
   const m = useMemo(() => {
     const asphalt = new THREE.MeshStandardMaterial({ map: asphaltTex(), roughness: 0.95 });
     (asphalt.map as THREE.Texture).wrapS = (asphalt.map as THREE.Texture).wrapT = THREE.RepeatWrapping;
@@ -175,6 +175,19 @@ const City: React.FC<{ built: boolean }> = ({ built }) => {
         parts.push(<mesh key="drum" geometry={geo.cyl} material={m.hallWall} position={[cx, 2.15, cz - 0.6]} scale={[1.6, 0.7, 1.6]} castShadow />);
         parts.push(<mesh key="dome" geometry={geo.dome} material={m.dome} position={[cx, 2.5, cz - 0.6]} scale={[1.7, 1.5, 1.7]} castShadow />);
         box(`steps${k}`, m.plaza, [cx, 0.28, cz + 1.25], [3.2, 0.2, 0.5]);
+      } else if (suburbs.some(([sx, sz]) => sx === bx && sz === bz)) {
+        // a suburb block: 4×4 small house plots (lawns with a white plot line)
+        const ps = inner / 4;
+        for (let i = 0; i < 4; i++)
+          for (let j = 0; j < 4; j++) {
+            const px = cx - inner / 2 + ps * (i + 0.5);
+            const pz = cz - inner / 2 + ps * (j + 0.5);
+            const kk = `${k}-s${i}${j}`;
+            box(`sp${kk}`, m.lot, [px, 0.17, pz], [ps - 0.12, 0.03, ps - 0.12]);
+            const e = (ps - 0.12) / 2 - 0.03;
+            box(`sz1${kk}`, m.zone, [px, 0.19, pz + e], [ps - 0.18, 0.02, 0.04]);
+            box(`sz2${kk}`, m.zone, [px + e, 0.19, pz], [0.04, 0.02, ps - 0.18]);
+          }
       } else {
         // four lots per block: zoned grass with a white zoning border, or (built) a placeholder tower on some
         for (let i = 0; i < 2; i++)
@@ -251,8 +264,9 @@ const City: React.FC<{ built: boolean }> = ({ built }) => {
   });
   return <>{parts}</>;
 };
+export const City = React.memo(CityImpl);
 
-const Lights: React.FC = () => {
+export const Lights: React.FC = () => {
   const sun = useMemo(() => {
     const l = new THREE.DirectionalLight("#fff4e0", 2.6);
     l.position.set(-30, 45, 22);
