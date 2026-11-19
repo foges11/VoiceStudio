@@ -61,7 +61,13 @@ const PHRASES: W[][] = (() => {
 // ------------------------------------------------------------------ camera
 type Cam = { pos: V3; look: V3; fov: number };
 const WIDE: Cam = { pos: [31, 37, 35], look: [-1, 0, 1], fov: 38 };
+export const FUTURE_END = 1.38; // the cut lands on "these 192 lots"
 const camAt = (t: number): Cam => {
+  // S0 0–1.38: the future city (a labeled preview), a slow lateral drift at skyline height
+  if (t < FUTURE_END) {
+    const u = t / FUTURE_END;
+    return { pos: [lerp(27, 24, u), 21, lerp(29, 31, u)], look: [lerp(1, -1, u), 3.2, 1], fov: 40 };
+  }
   // S1 0–3.3: the establishing wide, a slow push
   if (t < 3.3) {
     const u = ramp(t, 0, 3.3);
@@ -291,13 +297,13 @@ const Hud: React.FC<{ t: number }> = ({ t }) => {
       <div style={{ position: "absolute", top: 110, left: 80, right: 80, display: "flex", flexDirection: "column", alignItems: "center" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 16, color: "rgba(255,255,255,0.85)", fontWeight: 600, fontSize: 26, letterSpacing: 7 }}>
           <div style={{ width: 50, height: 2, background: "#ffb23e" }} />
-          EPISODE 0
+          {t < FUTURE_END ? "PREVIEW · DAY 30?" : "EPISODE 0 · NOW"}
           <div style={{ width: 50, height: 2, background: "#ffb23e" }} />
         </div>
         <div style={{ marginTop: 8, color: "#ffffff", fontWeight: 800, fontSize: 100, letterSpacing: 3, lineHeight: 1, textShadow: "0 6px 24px rgba(0,0,0,0.35)" }}>
           BRAND<span style={{ color: "#ffb23e" }}>CITY</span>
         </div>
-        <div style={{ marginTop: 20, display: "flex", background: "rgba(14,20,32,0.6)", borderRadius: 16, overflow: "hidden" }}>
+        <div style={{ marginTop: 20, display: "flex", background: "rgba(14,20,32,0.6)", borderRadius: 16, overflow: "hidden", opacity: t < FUTURE_END ? 0 : 1 }}>
           {[
             ["0", "BRANDS"],
             ["192", "LOTS OPEN"],
@@ -380,7 +386,7 @@ export const BrandCityEp0: React.FC<{ audio?: boolean }> = ({ audio = true }) =>
       <ThreeCanvas width={1080} height={1920} shadows gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.05 }} style={{ position: "absolute", inset: 0 }}>
         <CamRig t={t} />
         <Lights />
-        <City built={false} suburbs={[SUBURB]} />
+        <City built={t < FUTURE_END} suburbs={[SUBURB]} />
         <Scene t={t} />
       </ThreeCanvas>
       <Hud t={t} />
