@@ -109,7 +109,7 @@ const CamRig: React.FC<{ t: number }> = ({ t }) => {
   c.lookAt(...k.look);
   c.updateProjectionMatrix();
   if (!scene.fog) {
-    scene.fog = new THREE.Fog("#cfe3f2", 70, 150);
+    scene.fog = new THREE.Fog("#cfe3f2", 55, 120);
     scene.background = new THREE.Color("#cfe3f2");
   }
   return null;
@@ -196,7 +196,7 @@ const Roof: React.FC<{ p: V3; w: number; h: number; op: number }> = ({ p, w, h, 
     [],
   );
   if (op <= 0.001 || h <= 0.01) return null;
-  m.body.opacity = 0.55 * op;
+  m.body.opacity = 0.7 * op;
   m.edge.opacity = 0.95 * op;
   const c: V3 = [p[0], p[1] + h / 2, p[2]];
   return (
@@ -238,8 +238,8 @@ const Scene: React.FC<{ t: number }> = ({ t }) => {
       lot: textTex([{ text: "LOT 01", size: 96, color: "#1b2029", weight: 800 }], 420, 160, "#ffd25a", 36),
       sign: textTex(
         [
-          { text: "YOUR BRAND", size: 110, color: "#1b2029", weight: 800 },
-          { text: "HERE", size: 110, color: "#ff8a1f", weight: 800 },
+          { text: "YOUR BRAND", size: 84, color: "#1b2029", weight: 800 },
+          { text: "HERE", size: 84, color: "#ff8a1f", weight: 800 },
         ],
         640,
         300,
@@ -279,11 +279,11 @@ const Hud: React.FC<{ t: number }> = ({ t }) => {
   const hh = String(Math.floor(cd / 3600)).padStart(2, "0");
   const mm = String(Math.floor((cd % 3600) / 60)).padStart(2, "0");
   const ss = String(cd % 60).padStart(2, "0");
-  const cdOp = ramp(t, 0.3, 0.7);
+  const cdOp = 1;
   // likes chip during the growth beat
   const likes = Math.round(lerp(0, 120, ramp(t, 9.9, 10.6)) + lerp(0, 1100, ramp(t, 10.8, 11.5)) + lerp(0, 2700, ramp(t, 11.6, 12.4)));
   const likeOp = ramp(t, 9.8, 10.1) * (1 - ramp(t, 12.45, 12.6));
-  const houseOp = ramp(t, 13.35, 13.6) * (1 - ramp(t, 15.9, 16.1));
+  const houseOp = ramp(t, 13.35, 13.6) * (1 - ramp(t, 14.45, 14.7));
   const tagOp = (k: number) => ramp(t, 6.25 + k * 0.2, 6.55 + k * 0.2) * (1 - ramp(t, 7.95, 8.25));
   return (
     <AbsoluteFill style={{ fontFamily: "Poppins" }}>
@@ -355,7 +355,7 @@ const Captions: React.FC<{ t: number }> = ({ t }) => {
   const p = PHRASES[i];
   const end = p[p.length - 1][1];
   if (t > end + 0.6) return null;
-  const op = Math.min(ramp(t, p[0][0] - 0.05, p[0][0] + 0.07), 1 - ramp(t, end + 0.4, end + 0.6));
+  const op = Math.min(i === 0 ? 1 : ramp(t, p[0][0] - 0.05, p[0][0] + 0.07), 1 - ramp(t, end + 0.4, end + 0.6));
   return (
     <div style={{ position: "absolute", top: 1235, left: 90, right: 170, textAlign: "center", opacity: op, fontFamily: "Poppins" }}>
       <span style={{ fontWeight: 800, fontSize: 62, lineHeight: 1.15, color: "#ffffff", textShadow: "0 3px 0 rgba(0,0,0,0.35), 0 6px 22px rgba(0,0,0,0.55)" }}>

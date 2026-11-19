@@ -117,6 +117,7 @@ const CityImpl: React.FC<{ built: boolean; suburbs?: [number, number][] }> = ({ 
       dome: std("#5b8fbf", 0.5, 0.2),
       plaza: std("#e8e2d4", 0.9),
       water: std("#4aa3d8", 0.25, 0.1),
+      field: std("#86c25c", 1),
     };
   }, []);
   const geo = useMemo(
@@ -151,7 +152,8 @@ const CityImpl: React.FC<{ built: boolean; suburbs?: [number, number][] }> = ({ 
 
   // ground and road surface
   parts.push(
-    <mesh key="road" geometry={geo.box} material={m.asphalt} position={[0, -0.05, 0]} scale={[NB * PITCH + 60, 0.1, NB * PITCH + 60]} receiveShadow />,
+    <mesh key="road" geometry={geo.box} material={m.asphalt} position={[0, -0.05, 0]} scale={[NB * PITCH + 1, 0.1, NB * PITCH + 1]} receiveShadow />,
+    <mesh key="fields" geometry={geo.box} material={m.field} position={[0, -0.08, 0]} scale={[400, 0.1, 400]} receiveShadow />,
   );
   const cars: Car[] = [];
   const carCols = ["#d33b2c", "#f2f2ea", "#2c5aa0", "#f0b429", "#3a3f48", "#e8e8e8", "#7a1f2b"];
