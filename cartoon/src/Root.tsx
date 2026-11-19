@@ -12,6 +12,7 @@ import { Ep0Thumb, Ep0ThumbWide } from "./city/Ep0Thumb";
 import { MOB1_FPS, MOB1_FRAMES, MobRuleDay1 } from "./mob/MobRuleDay1";
 import { MobRuleAvatar } from "./mob/MobRuleAvatar";
 import { MobvilleLook } from "./mob/MobvilleLook";
+import { MOB1V2_FPS, MOB1V2_FRAMES, MobRuleDay1v2 } from "./mob/MobRuleDay1v2";
 import { DURATION, LOOK_TIMES, PackageLook, PackageSheet, PackageShort } from "./package/Package";
 
 // DemoHero: a low hero framing with foreground props. Demo: one still. Demo-<mood>: the same frame in each act light. DemoWide: the whole set.
@@ -34,6 +35,7 @@ export const Root: React.FC = () => (
     {[0, 1, 2].map((k) => (
       <Composition key={k} id={`MobvilleLook-${k}`} component={MobvilleLook} durationInFrames={1} fps={30} width={1080} height={1920} defaultProps={{ shot: k }} />
     ))}
+    <Composition id="MobRuleDay1v2" component={MobRuleDay1v2} durationInFrames={MOB1V2_FRAMES} fps={MOB1V2_FPS} width={1080} height={1920} defaultProps={{ audio: true }} />
     <Composition id="MobRuleAvatar" component={MobRuleAvatar} durationInFrames={1} fps={30} width={1080} height={1080} />
     <Composition id="MobRuleDay1" component={MobRuleDay1} durationInFrames={MOB1_FRAMES} fps={MOB1_FPS} width={1080} height={1920} defaultProps={{ audio: true }} />
     <Composition id="Ep0ThumbWide" component={Ep0ThumbWide} durationInFrames={1} fps={30} width={1920} height={1080} />
