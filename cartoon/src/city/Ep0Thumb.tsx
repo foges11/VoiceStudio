@@ -59,3 +59,38 @@ export const Ep0Thumb: React.FC = () => {
     </AbsoluteFill>
   );
 };
+
+// ------------------------------------------------------------------ the 16:9 version (1920×1080): side by side
+const HalfW: React.FC<{ built: boolean; left: number }> = ({ built, left }) => (
+  <ThreeCanvas width={960} height={1080} shadows gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.08 }} style={{ position: "absolute", left, top: 0 }}>
+    <Cam />
+    <Lights />
+    <City built={built} />
+  </ThreeCanvas>
+);
+
+export const Ep0ThumbWide: React.FC = () => {
+  const ready = useFonts();
+  if (!ready) return <AbsoluteFill style={{ background: "#cfe3f2" }} />;
+  const tag = (text: string, bg: string): React.CSSProperties => ({ padding: "12px 44px", borderRadius: 999, background: bg, color: "#14181f", fontWeight: 800, fontSize: 84, letterSpacing: 6, boxShadow: "0 14px 40px rgba(0,0,0,0.35)" });
+  return (
+    <AbsoluteFill style={{ background: "#cfe3f2", fontFamily: "Poppins" }}>
+      <HalfW built left={0} />
+      <HalfW built={false} left={960} />
+      <AbsoluteFill style={{ background: "linear-gradient(rgba(10,16,28,0.5), rgba(10,16,28,0) 30%, rgba(10,16,28,0) 70%, rgba(10,16,28,0.45))" }} />
+      <div style={{ position: "absolute", left: 952, top: 0, bottom: 0, width: 16, background: "#ffffff", boxShadow: "0 0 30px rgba(0,0,0,0.35)" }} />
+      <div style={{ position: "absolute", top: 50, left: 0, right: 0, textAlign: "center", color: "#ffffff", fontWeight: 800, fontSize: 120, letterSpacing: 3, textShadow: "0 6px 26px rgba(0,0,0,0.5)" }}>
+        BRAND<span style={{ color: "#ffb23e" }}>CITY</span>
+      </div>
+      <div style={{ position: "absolute", top: 470, left: 0, width: 960, display: "flex", justifyContent: "center" }}>
+        <div style={tag("SOON", "rgba(255,255,255,0.95)")}>SOON</div>
+      </div>
+      <div style={{ position: "absolute", top: 470, left: 960, width: 960, display: "flex", justifyContent: "center" }}>
+        <div style={tag("NOW", "#ffb23e")}>NOW</div>
+      </div>
+      <div style={{ position: "absolute", top: 820, left: 960, width: 960, textAlign: "center", color: "#ffffff", fontWeight: 800, fontSize: 92, lineHeight: 1, textShadow: "0 6px 26px rgba(0,0,0,0.6)" }}>
+        EMPTY... <span style={{ color: "#ffb23e" }}>FOR NOW</span>
+      </div>
+    </AbsoluteFill>
+  );
+};
