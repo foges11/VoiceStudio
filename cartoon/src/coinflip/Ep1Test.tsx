@@ -8,26 +8,26 @@ import { useFonts } from "../inkbeat/core/frame";
 export const EP1T_FPS = 30;
 export const EP1T_FRAMES = 30 * EP1T_FPS;
 
-const PAPER = "#fbf6ec";
-const INK = "#1b1f2e";
-const GOLD = "#f5b82e";
-const RED = "#e85d4a";
-const GREEN = "#3ecf9a";
-const SKIN = "#ffd9b8";
-const W = 7; // ink width
+export const PAPER = "#fbf6ec";
+export const INK = "#1b1f2e";
+export const GOLD = "#f5b82e";
+export const RED = "#e85d4a";
+export const GREEN = "#3ecf9a";
+export const SKIN = "#ffd9b8";
+export const W = 7; // ink width
 
-const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
-const ease = (u: number) => 1 - Math.pow(1 - clamp(u), 3);
-const inOut = (u: number) => {
+export const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+export const ease = (u: number) => 1 - Math.pow(1 - clamp(u), 3);
+export const inOut = (u: number) => {
   const x = clamp(u);
   return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
 };
 /** 0→1 over [a, a+d] */
-const on = (t: number, a: number, d = 0.35) => ease((t - a) / d);
+export const on = (t: number, a: number, d = 0.35) => ease((t - a) / d);
 /** visible inside [a, b] with short fades */
-const win = (t: number, a: number, b: number) => clamp((t - a) / 0.25) * clamp((b - t) / 0.25);
+export const win = (t: number, a: number, b: number) => clamp((t - a) / 0.25) * clamp((b - t) / 0.25);
 /** a small, calm pop-in (no bounce) */
-const pop = (t: number, a: number) => ({ opacity: on(t, a, 0.25), transform: `scale(${0.92 + 0.08 * on(t, a, 0.3)})` });
+export const pop = (t: number, a: number) => ({ opacity: on(t, a, 0.25), transform: `scale(${0.92 + 0.08 * on(t, a, 0.3)})` });
 
 const LINES: [number, number, string][] = [
   [0.0, 4.6, "You spend $40 in seconds, but never save it. Why does your brain stop you?"],
@@ -40,8 +40,8 @@ const LINES: [number, number, string][] = [
 ];
 
 // ------------------------------------------------------------------ drawing pieces (SVG, user units = px)
-type Mood = "happy" | "neutral" | "strain" | "worried";
-const Face: React.FC<{ mood: Mood }> = ({ mood }) => (
+export type Mood = "happy" | "neutral" | "strain" | "worried";
+export const Face: React.FC<{ mood: Mood }> = ({ mood }) => (
   <g>
     <circle cx={-26} cy={-8} r={9} fill={INK} />
     <circle cx={26} cy={-8} r={9} fill={INK} />
@@ -59,7 +59,7 @@ const Face: React.FC<{ mood: Mood }> = ({ mood }) => (
 );
 
 /** the "you" character: round head, simple body, arms to given hand points (relative to the hips) */
-const Person: React.FC<{ x: number; y: number; s?: number; mood: Mood; hands?: [[number, number], [number, number]]; old?: boolean; shirt?: string; children?: React.ReactNode }> = ({
+export const Person: React.FC<{ x: number; y: number; s?: number; mood: Mood; hands?: [[number, number], [number, number]]; old?: boolean; shirt?: string; children?: React.ReactNode }> = ({
   x,
   y,
   s = 1,
@@ -101,7 +101,7 @@ const Person: React.FC<{ x: number; y: number; s?: number; mood: Mood; hands?: [
   </g>
 );
 
-const Bill: React.FC<{ x: number; y: number; s?: number; r?: number }> = ({ x, y, s = 1, r = 0 }) => (
+export const Bill: React.FC<{ x: number; y: number; s?: number; r?: number }> = ({ x, y, s = 1, r = 0 }) => (
   <g transform={`translate(${x} ${y}) rotate(${r}) scale(${s})`}>
     <rect x={-80} y={-42} width={160} height={84} rx={10} fill="#9fe0b8" stroke={INK} strokeWidth={W - 1} />
     <circle r={26} fill="none" stroke={INK} strokeWidth={4} />
@@ -111,7 +111,7 @@ const Bill: React.FC<{ x: number; y: number; s?: number; r?: number }> = ({ x, y
   </g>
 );
 
-const Jar: React.FC<{ x: number; y: number; label?: string }> = ({ x, y, label = "SAVINGS" }) => (
+export const Jar: React.FC<{ x: number; y: number; label?: string }> = ({ x, y, label = "SAVINGS" }) => (
   <g transform={`translate(${x} ${y})`}>
     <rect x={-110} y={-150} width={220} height={260} rx={40} fill="#e9f4ff" stroke={INK} strokeWidth={W} />
     <rect x={-80} y={-178} width={160} height={36} rx={10} fill={GOLD} stroke={INK} strokeWidth={W} />
@@ -122,7 +122,7 @@ const Jar: React.FC<{ x: number; y: number; label?: string }> = ({ x, y, label =
   </g>
 );
 
-const Brain: React.FC<{ x: number; y: number; s?: number }> = ({ x, y, s = 1 }) => (
+export const Brain: React.FC<{ x: number; y: number; s?: number }> = ({ x, y, s = 1 }) => (
   <g transform={`translate(${x} ${y}) scale(${s})`} strokeLinecap="round" strokeLinejoin="round">
     <path d="M 0 -150 C -110 -180 -205 -110 -190 -20 C -205 70 -140 150 -50 140 C -25 140 -8 130 0 115 Z" fill="#ffc6cf" stroke={INK} strokeWidth={W} />
     <path d="M 0 -150 C 110 -180 205 -110 190 -20 C 205 70 140 150 50 140 C 25 140 8 130 0 115 Z" fill="#ffc6cf" stroke={INK} strokeWidth={W} />
@@ -138,7 +138,7 @@ const Brain: React.FC<{ x: number; y: number; s?: number }> = ({ x, y, s = 1 }) 
 );
 
 /** a big hand-lettered word */
-const Big: React.FC<{ x: number; y: number; text: string; color?: string; size?: number; style?: React.CSSProperties }> = ({ x, y, text, color = INK, size = 120, style }) => (
+export const Big: React.FC<{ x: number; y: number; text: string; color?: string; size?: number; style?: React.CSSProperties }> = ({ x, y, text, color = INK, size = 120, style }) => (
   <text x={x} y={y} textAnchor="middle" fontFamily="Poppins" fontWeight={800} fontSize={size} fill={color} stroke={INK} strokeWidth={color === INK ? 0 : 5} paintOrder="stroke fill" style={style}>
     {text}
   </text>
