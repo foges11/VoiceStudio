@@ -10,7 +10,7 @@ import { Arrow, Card, Coin, Cross, LitBrain, Pair, Stamp, StarIcon, Strike, Stra
 import { Big, clamp, GOLD, GREEN, INK, inOut, Jar, on, PAPER, Person, pop, RED, win } from "./Ep1Test";
 
 export const SH1_FPS = 30;
-const END = 45.5;
+const END = 46.2;
 export const SH1_FRAMES = Math.ceil(END * SH1_FPS);
 const CAPS = CAPS_JSON as unknown as [number, number, string][];
 const WORDS = WORDS_JSON as unknown as [string, number, number][];
@@ -57,15 +57,13 @@ const Hook: SC = ({ t }) => {
   const w = TW("Which", 0);
   return (
     <g>
-      <g style={pop(t, 0)}>
+      <g transform={`translate(540 290) scale(${1 + 0.08 * Math.max(0, 1 - t / 0.3)}) translate(-540 -290)`}>
         <Big x={540} y={330} text="STOP." color={RED} size={150} />
       </g>
-      <g style={{ opacity: on(t, w) }}>
-        <Txt x={540} y={470} size={62}>
-          WHICH ONE ARE YOU?
-        </Txt>
-      </g>
-      <Grid t={t} at={[w, w + 0.12, w + 0.24, w + 0.36]} />
+      <Txt x={540} y={470} size={62}>
+        WHICH ONE ARE YOU?
+      </Txt>
+      <Grid t={t} at={[-1, -1, -1, -1]} hi={t > w ? Math.floor((t - w) / 0.35) % 4 : -1} />
     </g>
   );
 };
@@ -82,16 +80,16 @@ const TwoCircles: SC = ({ t }) => {
   return (
     <g>
       <g style={{ opacity: on(t, T("One circle")) }}>
-        <circle cx={540} cy={620} r={270} fill={GOLD} fillOpacity={0.45} stroke={INK} strokeWidth={7} />
-        <Person x={540} y={740} s={0.8} mood="happy" />
-        <Txt x={540} y={300} size={64}>
+        <circle cx={540} cy={580} r={250} fill={GOLD} fillOpacity={0.45} stroke={INK} strokeWidth={7} />
+        <Person x={540} y={700} s={0.75} mood="happy" />
+        <Txt x={540} y={290} size={64}>
           YOU TODAY
         </Txt>
       </g>
       <g style={{ opacity: on(t, other) }}>
-        <circle cx={540} cy={1170} r={270} fill="#6c8cff" fillOpacity={0.35} stroke={INK} strokeWidth={7} />
-        <Person x={540} y={1290} s={0.8} mood="happy" old />
-        <Txt x={540} y={1500} size={60}>
+        <circle cx={540} cy={1100} r={250} fill="#6c8cff" fillOpacity={0.35} stroke={INK} strokeWidth={7} />
+        <Person x={540} y={1220} s={0.75} mood="happy" old />
+        <Txt x={540} y={1415} size={60}>
           YOU IN 10 YEARS
         </Txt>
       </g>
@@ -116,12 +114,22 @@ const Options: SC = ({ t }) => {
 const PickNow: SC = ({ t }) => {
   const a = T("Pick one.");
   const pulse = 1 + 0.04 * Math.sin((t - a) * 12);
+  const p0 = TW("now", a) + 0.5;
+  const n = 3 - Math.floor((t - p0) / 0.4);
   return (
     <g>
       <Grid t={t} at={[0, 0, 0, 0]} />
       <g style={{ ...pop(t, a), transformOrigin: "540px 400px" }} transform={`translate(540 400) scale(${pulse}) translate(-540 -400)`}>
         <Big x={540} y={430} text="PICK ONE. NOW." color={GOLD} size={100} />
       </g>
+      {t >= p0 && n >= 1 && n <= 3 ? (
+        <g>
+          <circle cx={540} cy={1530} r={90} fill={GOLD} stroke={INK} strokeWidth={8} />
+          <Txt x={540} y={1565} size={100}>
+            {n}
+          </Txt>
+        </g>
+      ) : null}
     </g>
   );
 };
@@ -185,8 +193,8 @@ const StrangerS: SC = ({ t }) => {
         YOU
       </Txt>
       <g style={{ opacity: on(t, TW("future", a)) }}>
-        <Stranger x={540} y={1250} s={0.9} />
-        <Txt x={540} y={1480} size={56}>
+        <Stranger x={540} y={1180} s={0.85} />
+        <Txt x={540} y={1400} size={56}>
           FUTURE YOU
         </Txt>
       </g>
@@ -350,7 +358,6 @@ const sfx = (): [number, Sfx][] => {
   const o = T("A: far apart");
   return [
     [0, "pop"],
-    [TW("Which", 0), "pop"],
     [T("Your answer") + 0.6, "pop"],
     [T("One circle"), "pop"],
     [T("The other is you"), "pop"],
@@ -359,6 +366,9 @@ const sfx = (): [number, Sfx][] => {
     [TW("overlapping", o), "tick"],
     [TW("almost", T("D: almost")), "tick"],
     [T("Pick one."), "pop"],
+    [TW("now", T("Pick one.")) + 0.5, "tick"],
+    [TW("now", T("Pick one.")) + 0.9, "tick"],
+    [TW("now", T("Pick one.")) + 1.3, "tick"],
     [TW("153", T("Researchers gave")), "pop"],
     [TW("saved", T("had saved more")), "cash"],
     [TW("stranger", T("Why? Because")), "pop"],
@@ -371,15 +381,42 @@ const sfx = (): [number, Sfx][] => {
 };
 const SFX = sfx();
 
+// word-chunk captions: up to 3 words, break after punctuation, the spoken word in gold
+const CHUNKS: [number, number][] = [];
+{
+  let s0 = 0;
+  WORDS.forEach((w, i) => {
+    if (i - s0 + 1 >= 3 || /[.,?!]$/.test(w[0]) || i === WORDS.length - 1) {
+      CHUNKS.push([s0, i]);
+      s0 = i + 1;
+    }
+  });
+}
+
+const Captions: React.FC<{ t: number }> = ({ t }) => {
+  const k = CHUNKS.findIndex(([a, b], i) => {
+    const next = CHUNKS[i + 1] ? WORDS[CHUNKS[i + 1][0]][1] : Infinity;
+    return t >= WORDS[a][1] - 0.05 && t < (next - WORDS[b][2] < 1.2 ? next - 0.05 : WORDS[b][2] + 0.6);
+  });
+  if (k < 1) return null; // chunk 0 ("STOP.") is already the big title
+  const [a, b] = CHUNKS[k];
+  return (
+    <div style={{ position: "absolute", top: 1450, left: 40, right: 40, textAlign: "center" }}>
+      <span style={{ display: "inline-block", padding: "10px 30px", background: "rgba(27,31,46,0.92)", borderRadius: 22, fontWeight: 800, fontSize: 72, lineHeight: 1.2, color: "#fff" }}>
+        {WORDS.slice(a, b + 1).map((w, i) => (
+          <span key={i} style={{ color: t >= w[1] - 0.03 && t < (WORDS[a + i + 1]?.[1] ?? w[2] + 0.5) ? GOLD : "#fff" }}>
+            {(i ? " " : "") + w[0].toUpperCase()}
+          </span>
+        ))}
+      </span>
+    </div>
+  );
+};
+
 export const Short1: React.FC<{ audio?: boolean; captions?: boolean }> = ({ audio = true, captions = true }) => {
   const ready = useFonts();
   const t = useCurrentFrame() / SH1_FPS;
   if (!ready) return <AbsoluteFill style={{ background: PAPER }} />;
-  // a caption holds until the next one when the gap is short, so it never blinks off for a frame
-  const line = CAPS.find(([a, b], i) => {
-    const next = CAPS[i + 1]?.[0] ?? Infinity;
-    return t >= a - 0.1 && t < (next - b < 0.8 ? next - 0.1 : b + 0.15);
-  });
   return (
     <AbsoluteFill style={{ background: PAPER, fontFamily: "Poppins" }}>
       <svg width={1080} height={1920} viewBox="0 0 1080 1920">
@@ -394,11 +431,7 @@ export const Short1: React.FC<{ audio?: boolean; captions?: boolean }> = ({ audi
           ) : null;
         })}
       </svg>
-      {captions && line ? (
-        <div style={{ position: "absolute", top: 1560, left: 70, right: 70, textAlign: "center" }}>
-          <span style={{ display: "inline-block", padding: "14px 26px", background: "rgba(27,31,46,0.9)", color: "#fff", borderRadius: 18, fontWeight: 700, fontSize: 46, lineHeight: 1.25 }}>{line[2]}</span>
-        </div>
-      ) : null}
+      {captions ? <Captions t={t} /> : null}
       {audio ? <Audio src={staticFile("coinflip/short1-vo.wav")} /> : null}
       {audio
         ? SFX.map(([at, k], i) => (
