@@ -48,7 +48,7 @@ export const Txt: React.FC<{ x: number; y: number; children: React.ReactNode; si
   </text>
 );
 
-const Card: React.FC<{ x: number; y: number; w: number; h: number; fill?: string; stroke?: string; r?: number }> = ({ x, y, w, h, fill = "#fff", stroke = INK, r = 24 }) => (
+export const Card: React.FC<{ x: number; y: number; w: number; h: number; fill?: string; stroke?: string; r?: number }> = ({ x, y, w, h, fill = "#fff", stroke = INK, r = 24 }) => (
   <rect x={x - w / 2} y={y - h / 2} width={w} height={h} rx={r} fill={fill} stroke={stroke} strokeWidth={W} />
 );
 
@@ -61,7 +61,7 @@ const Phone: React.FC<{ x: number; y: number; s?: number; children?: React.React
 );
 
 /** an arrow drawn from (x1,y1) to (x2,y2), revealed by p (0..1) */
-const Arrow: React.FC<{ x1: number; y1: number; x2: number; y2: number; p?: number; color?: string; w?: number }> = ({ x1, y1, x2, y2, p = 1, color = INK, w = W + 3 }) => {
+export const Arrow: React.FC<{ x1: number; y1: number; x2: number; y2: number; p?: number; color?: string; w?: number }> = ({ x1, y1, x2, y2, p = 1, color = INK, w = W + 3 }) => {
   if (p <= 0) return null;
   const x = x1 + (x2 - x1) * p;
   const y = y1 + (y2 - y1) * p;
@@ -76,7 +76,7 @@ const Arrow: React.FC<{ x1: number; y1: number; x2: number; y2: number; p?: numb
 };
 
 /** a red strike-through drawn left to right */
-const Strike: React.FC<{ x1: number; x2: number; y: number; p: number }> = ({ x1, x2, y, p }) =>
+export const Strike: React.FC<{ x1: number; x2: number; y: number; p: number }> = ({ x1, x2, y, p }) =>
   p > 0 ? <path d={`M ${x1} ${y} L ${x1 + (x2 - x1) * p} ${y}`} stroke={RED} strokeWidth={16} strokeLinecap="round" /> : null;
 
 /** a tilted stamp */
@@ -90,10 +90,10 @@ export const Stamp: React.FC<{ x: number; y: number; text: string; color?: strin
   );
 };
 
-const Check: React.FC<{ x: number; y: number; s?: number; color?: string }> = ({ x, y, s = 1, color = GREEN }) => (
+export const Check: React.FC<{ x: number; y: number; s?: number; color?: string }> = ({ x, y, s = 1, color = GREEN }) => (
   <path d={`M ${x - 40 * s} ${y} L ${x - 10 * s} ${y + 30 * s} L ${x + 45 * s} ${y - 35 * s}`} fill="none" stroke={color} strokeWidth={16 * s} strokeLinecap="round" strokeLinejoin="round" />
 );
-const Cross: React.FC<{ x: number; y: number; s?: number }> = ({ x, y, s = 1 }) => (
+export const Cross: React.FC<{ x: number; y: number; s?: number }> = ({ x, y, s = 1 }) => (
   <path d={`M ${x - 35 * s} ${y - 35 * s} L ${x + 35 * s} ${y + 35 * s} M ${x + 35 * s} ${y - 35 * s} L ${x - 35 * s} ${y + 35 * s}`} stroke={RED} strokeWidth={16 * s} strokeLinecap="round" />
 );
 
@@ -111,7 +111,7 @@ const Bubble: React.FC<{ x: number; y: number; w: number; h?: number; tail?: "le
 };
 
 /** two "self" circles: today (gold) and future (blue), centres gap px apart */
-const Pair: React.FC<{ x: number; y: number; gap: number; r?: number; labels?: boolean; op2?: number }> = ({ x, y, gap, r = 80, labels = false, op2 = 1 }) => (
+export const Pair: React.FC<{ x: number; y: number; gap: number; r?: number; labels?: boolean; op2?: number }> = ({ x, y, gap, r = 80, labels = false, op2 = 1 }) => (
   <g>
     <circle cx={x - gap / 2} cy={y} r={r} fill={GOLD} fillOpacity={0.55} stroke={INK} strokeWidth={W - 1} />
     <circle cx={x + gap / 2} cy={y} r={r} fill={BLUE} fillOpacity={0.45} stroke={INK} strokeWidth={W - 1} style={{ opacity: op2 }} />
@@ -129,7 +129,7 @@ const Pair: React.FC<{ x: number; y: number; gap: number; r?: number; labels?: b
 );
 
 /** a silhouette "stranger" (grey, faceless) */
-const Stranger: React.FC<{ x: number; y: number; s?: number }> = ({ x, y, s = 1 }) => (
+export const Stranger: React.FC<{ x: number; y: number; s?: number }> = ({ x, y, s = 1 }) => (
   <g transform={`translate(${x} ${y}) scale(${s})`}>
     <path d="M -30 40 L -36 150 M 30 40 L 36 150" stroke={GREY} strokeWidth={W + 3} strokeLinecap="round" />
     <rect x={-62} y={-120} width={124} height={170} rx={52} fill="#c7ccd8" stroke={GREY} strokeWidth={W} />
@@ -148,7 +148,7 @@ const Shades: React.FC = () => (
   </g>
 );
 
-const StarIcon: React.FC<{ x: number; y: number; r?: number; fill?: string }> = ({ x, y, r = 40, fill = GOLD }) => {
+export const StarIcon: React.FC<{ x: number; y: number; r?: number; fill?: string }> = ({ x, y, r = 40, fill = GOLD }) => {
   const pts = Array.from({ length: 10 }, (_, i) => {
     const a = (i * Math.PI) / 5 - Math.PI / 2;
     const rr = i % 2 ? r * 0.45 : r;
@@ -157,7 +157,7 @@ const StarIcon: React.FC<{ x: number; y: number; r?: number; fill?: string }> = 
   return <polygon points={pts} fill={fill} stroke={INK} strokeWidth={5} strokeLinejoin="round" />;
 };
 
-const Coin: React.FC<{ x: number; y: number; r?: number; label?: string }> = ({ x, y, r = 46, label = "$" }) => (
+export const Coin: React.FC<{ x: number; y: number; r?: number; label?: string }> = ({ x, y, r = 46, label = "$" }) => (
   <g>
     <circle cx={x} cy={y + 5} r={r} fill="#c98a12" />
     <circle cx={x} cy={y} r={r} fill={GOLD} stroke={INK} strokeWidth={5} />
@@ -506,7 +506,7 @@ const FourPeople: SC = ({ t }) => {
 };
 
 /** a brain with an activity spot (glow 0..1) */
-const LitBrain: React.FC<{ x: number; y: number; s: number; glow: number; label: string; sub?: string }> = ({ x, y, s, glow, label, sub }) => (
+export const LitBrain: React.FC<{ x: number; y: number; s: number; glow: number; label: string; sub?: string }> = ({ x, y, s, glow, label, sub }) => (
   <g>
     <Brain x={x} y={y} s={s} />
     <circle cx={x} cy={y - 40 * s} r={60 * s} fill={GOLD} style={{ opacity: glow }} />
