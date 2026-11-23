@@ -58,8 +58,6 @@ So how far away is future you, for you? There's a way to check. It takes five se
 
 ## Chapter 4: The Two-Circle Test
 
-Let's test your brain. This takes five seconds.
-
 Picture two circles. One is you today. The other is you in ten years.
 
 Now pick the picture that feels right. Are the circles far apart, barely touching? Overlapping a little? Or almost on
