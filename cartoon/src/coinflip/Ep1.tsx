@@ -33,7 +33,7 @@ const TW = (w: string, after: number) => {
 };
 
 // ------------------------------------------------------------------ small drawing helpers
-const Txt: React.FC<{ x: number; y: number; children: React.ReactNode; size?: number; color?: string; weight?: number; anchor?: "start" | "middle" | "end"; style?: React.CSSProperties }> = ({
+export const Txt: React.FC<{ x: number; y: number; children: React.ReactNode; size?: number; color?: string; weight?: number; anchor?: "start" | "middle" | "end"; style?: React.CSSProperties }> = ({
   x,
   y,
   children,
@@ -80,7 +80,7 @@ const Strike: React.FC<{ x1: number; x2: number; y: number; p: number }> = ({ x1
   p > 0 ? <path d={`M ${x1} ${y} L ${x1 + (x2 - x1) * p} ${y}`} stroke={RED} strokeWidth={16} strokeLinecap="round" /> : null;
 
 /** a tilted stamp */
-const Stamp: React.FC<{ x: number; y: number; text: string; color?: string; size?: number; rot?: number; t: number; at: number }> = ({ x, y, text, color = RED, size = 80, rot = -8, t, at }) => {
+export const Stamp: React.FC<{ x: number; y: number; text: string; color?: string; size?: number; rot?: number; t: number; at: number }> = ({ x, y, text, color = RED, size = 80, rot = -8, t, at }) => {
   const w = text.length * size * 0.66 + 70;
   return (
     <g style={pop(t, at)} transform={`rotate(${rot} ${x} ${y})`}>
