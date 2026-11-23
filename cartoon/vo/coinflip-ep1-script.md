@@ -4,7 +4,7 @@
 **Thumbnail:** the "you" character face to face with an older "future you"; text "FUTURE YOU" (2 words).
 **Hook (scored):** "You spend $40 in seconds, but never save it. Why does your brain stop you?" (/ig-reel 73 STRONG,
 /yt-script 76 STRONG)
-**Length:** about 1,350 words, about 9 min at 150 wpm.
+**Length:** about 1,200 words, about 8 min at 150 wpm; 8–9 min with chapter cards and the pause in the circle test.
 
 ---
 
