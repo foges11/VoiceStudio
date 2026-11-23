@@ -43,3 +43,40 @@ fix" style, applied to money.
 2. A problem the viewer has, explained by their brain, then the fix.
 3. Thumbnails: one face or object, an emotion, 2–3 big words or one number.
 4. 10–15 minutes.
+
+## Deep dive: Better Than Yesterday vs The Swedish Investor
+
+(From each channel's last ~40 long videos, ranked against its own median, plus the top-8 thumbnails. Transcripts weren't
+reachable from this session.)
+
+**Better Than Yesterday:** hits are 8–78x its median: "How I Tricked My Brain…" (78x), "The 20 Second Rule" (19x),
+"Why You Can't FOCUS - And How To Fix That" (15x). Flops (0.1x): "Why Everything You Do Matters", "Hard Work Is NOT
+Enough", and a money video, "Making $100,000 is Hard…".
+- Thumbnails: off-white background, hand-drawn doodle style, 2–4 giant words filling half the frame, one simple
+  drawing (a head, a stopwatch, a desk). Same look every time.
+- The thumbnail text is not the title: title "How I Tricked My Brain To Like Doing Hard Things", thumbnail "DOPAMINE
+  DETOX".
+- Every hit names a concept: "Dopamine Detox", "The 20 Second Rule", "Mini Habits", "1PM–4PM".
+- 13–14 min.
+
+**The Swedish Investor:** hits are 2–34x its median: "The Intelligent Investor's Road to $1,000,000" (34x), "Warren
+Buffett: 12 Mistakes Every Investor Makes" (14x), "Atomic Habits" (4.6x). Flops (0.1–0.3x): monthly "Stock Market
+News", personal portfolio updates.
+- Thumbnails: branded teal/blue background, a bear logo top right, a famous real face (Buffett, Munger) or the cartoon
+  character, one bold red/white phrase or number ("$1,000,000", "$100 PER WEEK", "NO ONE IS SAFE!").
+- Borrowed authority: famous investors and famous books carry the click.
+- 12–24 min.
+
+**What both do**
+1. One recognisable thumbnail system: same background, font and corner logo, so the channel is spotted in a feed.
+2. Thumbnail and title split the job: the title says the topic, the thumbnail says 2–4 words or one number.
+3. Each video sells one named idea ("The 20 Second Rule", "12 Mistakes", "$1,000,000").
+4. Evergreen only. Their flops are news, updates, personal results, or vague titles.
+5. A benefit for the viewer: a fix, a method or a mistake to avoid.
+
+**How they differ:** BTY is drawn and self-help ("your brain"); SI uses real famous faces and numbers ("borrowed
+authority").
+
+**For Coinflip Mind:** BTY's drawn style and "your brain + fix" titles, plus SI's money anchors (famous books and people,
+big real numbers). A fixed thumbnail system: one background, one bold font, a small coin logo in the corner, 2–4 words.
+Name the idea in every video ("The $9.99 Trick", "The Pain of Paying"). No news or updates.
