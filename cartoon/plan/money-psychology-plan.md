@@ -1,4 +1,7 @@
-# Money psychology channel: plan
+# Coinflip Mind: channel plan
+
+**Channel:** Coinflip Mind (@CoinflipMind). Scope: psychology in general (how your mind really works), with money
+psychology as a main topic, not the only one. Description: "Your decisions are more random than you think."
 
 **Lane:** animated explainers on why people do what they do with money. Room to widen into general psychology later
 without changing the channel's name or look.
