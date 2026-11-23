@@ -313,7 +313,7 @@ const StrangerScene: SC = ({ t }) => {
 };
 
 const Roadmap: SC = ({ t }) => {
-  const xs = [400, 787, 1173, 1560];
+  const xs = [380, 767, 1153, 1540];
   const at = [TW("brain", T("In this video")), T("A five-second"), T("The trick"), T("And one rule")];
   const titles = ["BRAIN SCAN", "5-SEC TEST", "THE TRICK", "ONE RULE"];
   return (
@@ -477,7 +477,7 @@ const Scanner: SC = ({ t }) => {
 
 const FourPeople: SC = ({ t }) => {
   const at = [T("Themselves today."), T("Themselves in ten"), T("A celebrity today."), T("And that same celebrity")];
-  const xs = [400, 787, 1173, 1560];
+  const xs = [380, 767, 1153, 1540];
   const labels = [
     ["YOU", "TODAY"],
     ["YOU", "IN 10 YEARS"],
@@ -668,12 +668,12 @@ const Circles: SC = ({ t }) => {
           WHICH ONE FEELS RIGHT?
         </Txt>
         {gaps.map((g, i) => {
-          const x = 400 + i * 373;
+          const x = 380 + i * 387;
           const hi = t > opts[i] && t < (opts[i + 1] ?? T("Pause and pick"));
           return (
             <g key={i} style={{ opacity: on(t, opts[i], 0.3) }}>
-              <Card x={x} y={480} w={330} h={380} fill={hi ? "#fff4d6" : "#fff"} />
-              <Pair x={x} y={450} gap={g * 0.62} r={68} />
+              <Card x={x} y={480} w={350} h={380} fill={hi ? "#fff4d6" : "#fff"} />
+              <Pair x={x} y={450} gap={g * 0.5} r={62} />
               <Txt x={x - 125} y={340} size={36} anchor="start">
                 {"ABCD"[i]}
               </Txt>
@@ -1032,7 +1032,7 @@ const Chart: SC = ({ t }) => {
       {/* money put in (straight line) */}
       <g style={{ opacity: on(t, TW("put", by65)) }}>
         <path d={`M ${ax(25)} ${ay(0)} L ${ax(65)} ${ay(48000)}`} stroke={GREY} strokeWidth={6} strokeDasharray="14 10" />
-        <Txt x={ax(65) - 10} y={ay(48000) - 20} size={32} anchor="end" color={GREY}>
+        <Txt x={ax(65) - 10} y={ay(48000) + 44} size={32} anchor="end" color={GREY}>
           $48,000 PUT IN
         </Txt>
       </g>
@@ -1890,12 +1890,10 @@ export const Ep1: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
   const ready = useFonts();
   const t = useCurrentFrame() / EP1_FPS;
   if (!ready) return <AbsoluteFill style={{ background: PAPER }} />;
-  const line = CAPS.find(([a, b]) => t >= a - 0.1 && t < b + 0.15);
-  const endO = on(t, T("Just a little later") + 1.6, 0.5);
   return (
     <AbsoluteFill style={{ background: PAPER, fontFamily: "Poppins" }}>
       <svg width={1920} height={1080} viewBox="0 0 1920 1080">
-        <g transform="translate(960 470) scale(1.22) translate(-960 -470)">
+        <g transform="translate(960 540) scale(1.26) translate(-960 -480)">
           {SCENES.map(([, S], i) => {
             const [a, b] = RANGES[i];
             const op = i === 0 ? clamp((b - t) / 0.25) : win(t, a, b);
@@ -1906,22 +1904,8 @@ export const Ep1: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
             ) : null;
           })}
         </g>
-        <g transform="translate(90 80)" style={{ opacity: clamp((T("Think about it.") + 1 - t) / 0.5) }}>
-          <circle r={34} fill={GOLD} stroke={INK} strokeWidth={5} />
-          <Txt x={0} y={12} size={30}>
-            C
-          </Txt>
-          <Txt x={52} y={11} size={30} anchor="start">
-            COINFLIP MIND
-          </Txt>
-        </g>
         <EndCard t={t} />
       </svg>
-      {line && endO < 0.5 ? (
-        <div style={{ position: "absolute", bottom: 48, left: 160, right: 160, textAlign: "center" }}>
-          <span style={{ display: "inline-block", padding: "14px 28px", background: "rgba(27,31,46,0.88)", color: "#fff", borderRadius: 16, fontWeight: 600, fontSize: 38, lineHeight: 1.3 }}>{line[2]}</span>
-        </div>
-      ) : null}
       {audio ? <Audio src={staticFile("coinflip/coinflip-ep1-vo.wav")} /> : null}
     </AbsoluteFill>
   );
