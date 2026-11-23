@@ -80,3 +80,55 @@ authority").
 **For Coinflip Mind:** BTY's drawn style and "your brain + fix" titles, plus SI's money anchors (famous books and people,
 big real numbers). A fixed thumbnail system: one background, one bold font, a small coin logo in the corner, 2–4 words.
 Name the idea in every video ("The $9.99 Trick", "The Pain of Paying"). No news or updates.
+
+## Script breakdown (from the creator's transcript screenshots)
+
+### The Swedish Investor: "The Intelligent Investor's Road to $1,000,000" (23 min), first 2 minutes
+- 0:00 Hook = a character's result, then the gap: "At the age of 43, Tom retired… although, on the day he graduated
+  college, he didn't have a penny to his name." The payoff comes first, then the contrast.
+- 0:08–1:12 Relatable setup with concrete detail: a named job (GM), a supervisor with a golden watch who only talks about
+  wild boar hunting, a father who can only hike once a month. It mirrors the viewer's fear (stuck in a 9-to-5).
+- 1:21 Thesis in one line: "Ironically, making money seemed like it was costing them too much."
+- 1:21 Roadmap: "This video will show you three stages…"
+- 1:38 Stakes as a number: without investing, 57 instead of 43, "14 years of the most significant currency in life:
+  time".
+- 1:58 Open loops: "what he focused on… and, perhaps most importantly, what he didn't do".
+- Chapters in the video ("Intro", …).
+
+### Better Than Yesterday: "How I Tricked My Brain To Like Doing Hard Things" (14 min), first 3.5 minutes
+- 0:07 Hook = calling out the viewer: "You probably don't have a problem playing video games… for 2 hours… But what
+  about half an hour of studying? Oof." A contrast everyone recognizes, with light humor.
+- 0:34 The tension: "Even though you logically know… you still prefer…"
+- 0:48 States the obvious explanation, then moves past it: "One might argue it's obvious why…"
+- 0:59–1:05 The real question: "Why are some people more motivated… And is there a way to make doing difficult things
+  easy?"
+- Named chapters ("Chapter 2: EASY HARD").
+- 1:14 One concept, plus correcting a misconception: "Dopamine is often considered a pleasure molecule. But that's not
+  quite what it does."
+- 1:32–2:32 Science as a story: the rat lever experiments (rats refused to eat or sleep; blocking dopamine made them
+  stop moving).
+- 2:41 Bridges back to "you": "you can see similar effects… in our daily lives."
+- 2:48–3:26 The mechanism in plain words, with an everyday example (comfort food), and a sting: "even if it actually
+  makes you feel worse."
+
+### What both scripts do
+1. Within 10 s: a relatable moment with a contrast (no money at 23, retired at 43; games for 2 hours, can't study for 30 min).
+2. Concrete specifics everywhere: ages, companies, durations, objects.
+3. By 1:00–1:30: the question or promise, plus a roadmap ("three stages", chapters).
+4. Stakes as a number ("14 years").
+5. Open loops paid off later ("what he didn't do").
+6. Evidence told as a story (an experiment, a character), then bridged back to "you".
+7. One misconception corrected (an "aha" moment).
+8. Short spoken sentences, small asides ("Oof", "Hmm").
+
+### Coinflip Mind script template (10–14 min)
+| Time | Beat |
+|---|---|
+| 0:00 | A "you" moment with a contrast ("You'd never pay $10 for this. But $9.99? Already in your cart.") |
+| 0:20 | The obvious explanation, then why it's wrong |
+| 0:45 | The real question, the promise, the roadmap (named chapters) |
+| 1:15 | One concept + the misconception it corrects |
+| 1:45 | The experiment or real case, told as a story with concrete details |
+| 3:00 | Bridge to the viewer's life: 2–3 everyday examples |
+| middle | 3–4 chapters, each opening with its own mini-hook and closing an open loop |
+| last 1–2 min | The fix, named ("The Autopilot Rule"), a one-line recap, then cut (no long outro) |
