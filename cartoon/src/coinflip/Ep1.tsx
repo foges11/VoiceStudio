@@ -263,7 +263,7 @@ const Pain: SC = ({ t }) => {
 
 const Discipline: SC = ({ t }) => (
   <g>
-    <g style={pop(t, T("Most people") + 1.0)}>
+    <g style={pop(t, T("Most people") + 0.1)}>
       <Big x={960} y={300} text="DISCIPLINE?" size={130} />
     </g>
     <g style={{ opacity: on(t, T("Some people")) }}>
@@ -566,10 +566,19 @@ const Patience: SC = ({ t }) => {
   const grab = TW("money", T("they were more likely"));
   return (
     <g>
+      <g style={{ opacity: on(t, T("Here's the part") + 0.1) * (1 - on(t, T("The people whose") - 0.1, 0.3)) }}>
+        <Coin x={960} y={500} r={150} />
+        <Txt x={960} y={230} size={64}>
+          WHY IT MATTERS FOR YOUR MONEY
+        </Txt>
+      </g>
       <g style={pop(t, TW("least", T("The people whose")))}>
         <Txt x={960} y={200} size={64}>
           STRANGER-LIKE = LEAST PATIENT
         </Txt>
+      </g>
+      <g style={{ opacity: on(t, T("The people whose") + 0.3) * (1 - on(t, TW("smaller", off) - 0.3, 0.3)) }}>
+        <Stranger x={960} y={680} s={0.9} />
       </g>
       <g style={pop(t, TW("smaller", off))}>
         <Card x={620} y={540} w={420} h={400} />
@@ -601,8 +610,8 @@ const Choice: SC = ({ t }) => {
   return (
     <g>
       <Stamp x={960} y={200} text="NOT LAZY" color={GREEN} t={t} at={TW("lazy", T("So when Sam skips"))} size={70} rot={-4} />
+      <Person x={600} y={700} s={0.9} mood="happy" />
       <g style={{ opacity: on(t, TW("me", b + 1)) }}>
-        <Person x={600} y={700} s={0.9} mood="happy" />
         <Txt x={600} y={410} size={48}>
           ME, RIGHT NOW
         </Txt>
@@ -1302,7 +1311,7 @@ const SMT: SC = ({ t }) => {
   const s = T("a slice of every");
   return (
     <g>
-      <g style={pop(t, TW("Save", a))}>
+      <g style={pop(t, a + 0.2)}>
         <rect x={500} y={130} width={920} height={130} rx={30} fill={GOLD} stroke={INK} strokeWidth={W} />
         <Txt x={960} y={218} size={72}>
           SAVE MORE TOMORROW
