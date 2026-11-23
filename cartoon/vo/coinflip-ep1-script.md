@@ -22,9 +22,8 @@ But that's not what's going on.
 
 The real reason is weirder. Your brain thinks future you is a stranger.
 
-In this video, you'll see the brain scan that showed it, a test you can take on yourself in five seconds, the trick
-that got people to almost quadruple their savings, and one simple rule you can set up today, so saving happens without
-you even trying.
+In this video: the brain scan that proved it. A five-second test you can take on yourself. The trick that almost
+quadrupled people's savings. And one rule you can set up today, so saving happens without you even trying.
 
 ## Chapter 2: Meet Sam
 
@@ -37,8 +36,8 @@ Sam isn't bad with money. Sam is normal. And to understand why, we need to look 
 
 ## Chapter 3: The Stranger Inside Your Head
 
-In 2009, researchers at Stanford put people in a brain scanner and asked them to think about four people: themselves
-today, themselves ten years from now, a celebrity today, and that same celebrity ten years from now.
+In 2009, researchers at Stanford put people in a brain scanner. Then they asked them to think about four people.
+Themselves today. Themselves in ten years. A celebrity today. And that same celebrity in ten years.
 
 When people thought about themselves today, one part of their brain lit up. When they thought about the celebrity, it
 was quieter.
