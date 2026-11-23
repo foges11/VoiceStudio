@@ -4,7 +4,7 @@
 **Thumbnail:** the "you" character face to face with an older "future you"; text "FUTURE YOU" (2 words).
 **Hook (scored):** "You spend $40 in seconds, but never save it. Why does your brain stop you?" (/ig-reel 73 STRONG,
 /yt-script 76 STRONG)
-**Length:** about 870 words, about 6 min at 150 wpm (8–10 min with pauses, examples on screen and the chapter cards). Better tight than padded; add a chapter only if it earns its place.
+**Length:** about 1,350 words, about 9 min at 150 wpm.
 
 ---
 
@@ -22,10 +22,20 @@ But that's not what's going on.
 
 The real reason is weirder. Your brain thinks future you is a stranger.
 
-In this video, you'll see the brain scan that showed it, the trick that got people to almost quadruple their
-savings, and one simple rule you can set up today, so saving happens without you even trying.
+In this video, you'll see the brain scan that showed it, a test you can take on yourself in five seconds, the trick
+that got people to almost quadruple their savings, and one simple rule you can set up today, so saving happens without
+you even trying.
 
-## Chapter 2: The Stranger Inside Your Head
+## Chapter 2: Meet Sam
+
+Meet Sam. Sam is 25, has a job, and every month, Sam promises: this month, I'll save.
+
+And every month, the same thing happens. A dinner. A pair of shoes. A sale that ends tonight. By the 30th, there's
+nothing left to save.
+
+Sam isn't bad with money. Sam is normal. And to understand why, we need to look inside Sam's head.
+
+## Chapter 3: The Stranger Inside Your Head
 
 In 2009, researchers at Stanford put people in a brain scanner and asked them to think about four people: themselves
 today, themselves ten years from now, a celebrity today, and that same celebrity ten years from now.
@@ -41,10 +51,28 @@ To your brain, future you is almost someone else.
 Here's the part that matters for your money. The people whose future self looked most like a stranger were also the
 least patient. Offered some money now or more money later, they grabbed the money now.
 
-So when you skip saving, you're not lazy. Your brain is making a very normal choice: you, right now, or a stranger
-you'll never meet. And it picks you. Every time.
+So when Sam skips saving, Sam isn't lazy. Sam's brain is making a very normal choice: me, right now, or a stranger I'll
+never meet. And it picks right now. Every time.
 
-## Chapter 3: Why Spending Feels So Easy
+## Chapter 4: The Two-Circle Test
+
+Let's test your brain. This takes five seconds.
+
+Picture two circles. One is you today. The other is you in ten years.
+
+Now pick the picture that feels right. Are the circles far apart, barely touching? Overlapping a little? Or almost on
+top of each other?
+
+Pause and pick one. Seriously.
+
+Researchers used a test like this on 153 Americans. The people who chose circles that overlapped more, the people who
+felt connected to their future self, had built up more savings.
+
+So if your circles were far apart, now you know why saving feels so hard. It's not a character flaw. It's distance.
+
+And distance can be shrunk.
+
+## Chapter 5: Why Spending Feels So Easy
 
 Now flip it around. Why does spending feel so easy?
 
@@ -55,22 +83,34 @@ Saving is the opposite. You give something up today, and the reward goes to the 
 
 That's not a fair fight. Right-now you wins almost every time.
 
-## Chapter 4: What The Stranger Loses
+## Chapter 6: Built For Right-Now You
 
-Let's put numbers on that fight.
+And the world knows it.
+
+Look at how spending is designed. One tap to buy. Your card already saved. "Arrives tomorrow." "Pay later in four easy
+payments."
+
+Every one of those removes a moment where you might stop and think. And "pay later" is the cleverest: it hands the
+cost to the same stranger you're not saving for.
+
+Sam's phone is built to talk to right-now Sam. Nothing on it talks to future Sam.
+
+## Chapter 7: What The Stranger Loses
+
+So let's put numbers on what future Sam is losing.
 
 One $40 delivery a week is $2,080 a year. Easy to spend, because each one is small.
 
 Now picture $100 a month going into savings instead, starting at 25. Say it grows 7% a year. That's an assumption,
-not a promise. By 65, you'd have put in $48,000, and future you would have about $262,000.
+not a promise. By 65, Sam would have put in $48,000, and future Sam would have about $262,000.
 
-Start at 35 instead. Same $100 a month. Future you gets about $122,000.
+Start at 35 instead. Same $100 a month. Future Sam gets about $122,000.
 
-Waiting ten years just cost future you around $140,000.
+Waiting ten years just cost future Sam around $140,000.
 
-That's the stranger's side of the deal. Right-now you never sees that number. So it never counts.
+That's the stranger's side of the deal. Right-now Sam never sees that number. So it never counts.
 
-## Chapter 5: Meet Future You
+## Chapter 8: Meet Future You
 
 So what happens if you make the stranger less of a stranger?
 
@@ -84,7 +124,7 @@ The people who had just looked their older self in the eyes chose to set aside m
 It was a lab experiment, and the money was hypothetical, so don't treat it like magic. But the idea is powerful: when
 future you has a face, your brain starts to care about them.
 
-## Chapter 6: The Trick That Almost Quadrupled Savings
+## Chapter 9: The Trick That Almost Quadrupled Savings
 
 Seeing your older self helps. But two economists, Richard Thaler and Shlomo Benartzi, found something even stronger.
 
@@ -101,7 +141,17 @@ At the first company that tried it, 78% of the people offered the plan joined. T
 
 Same people. Same brains. They just stopped asking willpower to do the work.
 
-## Chapter 7: The Autopilot Rule
+## Chapter 10: "But I Don't Earn Enough"
+
+Maybe you're thinking: that's nice, but I don't earn enough to save.
+
+Fair. So start smaller than feels useful. $25 a paycheck. If you're paid every two weeks, that's $650 by the end of the
+year, without ever feeling a big loss.
+
+The amount matters less than the habit. Save More Tomorrow worked because people started small and let it grow with
+their raises. Once the habit runs on its own, making it bigger is easy.
+
+## Chapter 11: The Autopilot Rule
 
 So here's the fix. Call it the Autopilot Rule: never make saving a decision you have to make again.
 
@@ -120,7 +170,10 @@ stranger into a person.
 Four: make spending one step slower. Delete your saved card from the app you overspend in. That one extra step gives
 future you a chance to speak up.
 
-## Chapter 8: Outro
+Sam tried it. $100 a month, automatic, on payday. Three months later, Sam hadn't missed it once, because Sam never had to
+decide.
+
+## Chapter 12: Outro
 
 Your brain isn't broken. It's doing exactly what it was built to do: take care of the person it can see.
 
@@ -134,10 +187,15 @@ Because the person you're saving for isn't a stranger. It's you. Just a little l
 
 - Ersner-Hershfield, Wimmer & Knutson (2009), "Saving for the future self: neural measures of future self-continuity
   predict temporal discounting", Social Cognitive and Affective Neuroscience. https://pubmed.ncbi.nlm.nih.gov/19047075/
+- Ersner-Hershfield, Garton, Ballard, Samanez-Larkin & Knutson (2009), "Don't stop thinking about tomorrow: Individual
+  differences in future self-continuity account for saving", Judgment and Decision Making (overlapping-circles measure,
+  153 Americans). https://pubmed.ncbi.nlm.nih.gov/19774230/
 - Hershfield et al. (2011), "Increasing Saving Behavior Through Age-Progressed Renderings of the Future Self",
   Journal of Marketing Research (hypothetical allocations; effect sizes reported differently by source).
   https://clear.dol.gov/study/increasing-saving-behavior-through-age-progressed-renderings-future-self-hershfield-et-al-2011
-- Chapter 4 math: $100/month compounded monthly at an assumed 7%/year; 480 months = $262,481, 360 months = $121,997.
+- Chapter 7 math: $100/month compounded monthly at an assumed 7%/year; 480 months = $262,481, 360 months = $121,997.
+- Chapter 10 math: $25 x 26 biweekly paychecks = $650.
+- Sam is a fictional example (say so on screen once: "Sam is an example").
 - Thaler & Benartzi (2004), "Save More Tomorrow: Using Behavioral Economics to Increase Employee Saving", Journal of
   Political Economy (3.5% to 13.6% over 40 months; 78% joined).
   https://www.chicagobooth.edu/research/rustandy/social-impact-research/research-papers/2004/save-more-tomorrow-using-behavioral-economics-to-increase-employee-saving
