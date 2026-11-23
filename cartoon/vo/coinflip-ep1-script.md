@@ -49,10 +49,12 @@ celebrity than about themselves.
 To your brain, future you is almost someone else.
 
 Here's the part that matters for your money. The people whose future self looked most like a stranger were also the
-least patient. Offered some money now or more money later, they grabbed the money now.
+least patient. Offered a smaller amount now or a bigger amount later, they were more likely to take the money now.
 
 So when Sam skips saving, Sam isn't lazy. Sam's brain is making a very normal choice: me, right now, or a stranger I'll
 never meet. And it picks right now. Every time.
+
+So how far away is future you, for you? There's a way to check. It takes five seconds.
 
 ## Chapter 4: The Two-Circle Test
 
@@ -70,11 +72,11 @@ felt connected to their future self, had built up more savings.
 
 So if your circles were far apart, now you know why saving feels so hard. It's not a character flaw. It's distance.
 
-And distance can be shrunk.
+And distance can be shrunk. But first, you need to see who's on the other side of the fight.
 
 ## Chapter 5: Why Spending Feels So Easy
 
-Now flip it around. Why does spending feel so easy?
+Why does spending feel so easy?
 
 Because the reward is instant. Tap the button, the food's on its way, and your brain gets its hit of anticipation right
 now.
@@ -83,21 +85,15 @@ Saving is the opposite. You give something up today, and the reward goes to the 
 
 That's not a fair fight. Right-now you wins almost every time.
 
-## Chapter 6: Built For Right-Now You
-
-And the world knows it.
-
-Look at how spending is designed. One tap to buy. Your card already saved. "Arrives tomorrow." "Pay later in four easy
+And look at how spending is designed. One tap to buy. Your card already saved. "Arrives tomorrow." "Pay later in four easy
 payments."
 
 Every one of those removes a moment where you might stop and think. And "pay later" is the cleverest: it hands the
 cost to the same stranger you're not saving for.
 
-Sam's phone is built to talk to right-now Sam. Nothing on it talks to future Sam.
+Sam's phone is built to talk to right-now Sam. Nothing on it talks to future Sam. So what is future Sam actually losing?
 
-## Chapter 7: What The Stranger Loses
-
-So let's put numbers on what future Sam is losing.
+## Chapter 6: What The Stranger Loses
 
 One $40 delivery a week is $2,080 a year. Easy to spend, because each one is small.
 
@@ -110,11 +106,11 @@ Waiting ten years just cost future Sam around $140,000.
 
 That's the stranger's side of the deal. Right-now Sam never sees that number. So it never counts.
 
-## Chapter 8: Meet Future You
+Which raises the real question: can you make your brain see it? Researchers tried something that sounds like science fiction.
 
-So what happens if you make the stranger less of a stranger?
+## Chapter 7: Meet Future You
 
-In 2011, researchers tried exactly that. They took photos of young adults and digitally aged them, so each person could
+In 2011, researchers tried to make the stranger less of a stranger. They took photos of young adults and digitally aged them, so each person could
 look at a realistic version of themselves decades older.
 
 Then they asked everyone how they'd split money between spending now and saving for retirement.
@@ -124,9 +120,11 @@ The people who had just looked their older self in the eyes chose to set aside m
 It was a lab experiment, and the money was hypothetical, so don't treat it like magic. But the idea is powerful: when
 future you has a face, your brain starts to care about them.
 
-## Chapter 9: The Trick That Almost Quadrupled Savings
+But the biggest result didn't use a single photo.
 
-Seeing your older self helps. But two economists, Richard Thaler and Shlomo Benartzi, found something even stronger.
+## Chapter 8: The Trick That Almost Quadrupled Savings
+
+Two economists, Richard Thaler and Shlomo Benartzi, found something even stronger.
 
 They noticed that people hate feeling a loss today. Taking money out of this paycheck hurts.
 
@@ -141,7 +139,7 @@ At the first company that tried it, 78% of the people offered the plan joined. T
 
 Same people. Same brains. They just stopped asking willpower to do the work.
 
-## Chapter 10: "But I Don't Earn Enough"
+## Chapter 9: "But I Don't Earn Enough"
 
 Maybe you're thinking: that's nice, but I don't earn enough to save.
 
@@ -151,7 +149,7 @@ year, without ever feeling a big loss.
 The amount matters less than the habit. Save More Tomorrow worked because people started small and let it grow with
 their raises. Once the habit runs on its own, making it bigger is easy.
 
-## Chapter 11: The Autopilot Rule
+## Chapter 10: The Autopilot Rule
 
 So here's the fix. Call it the Autopilot Rule: never make saving a decision you have to make again.
 
@@ -170,10 +168,7 @@ stranger into a person.
 Four: make spending one step slower. Delete your saved card from the app you overspend in. That one extra step gives
 future you a chance to speak up.
 
-Sam tried it. $100 a month, automatic, on payday. Three months later, Sam hadn't missed it once, because Sam never had to
-decide.
-
-## Chapter 12: Outro
+## Chapter 11: Outro
 
 Your brain isn't broken. It's doing exactly what it was built to do: take care of the person it can see.
 
