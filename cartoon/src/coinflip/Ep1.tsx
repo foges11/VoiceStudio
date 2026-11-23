@@ -3,7 +3,7 @@
 // ep1-caps.json (script lines aligned to the VO), sub-beats from ep1-words.json (whisper word times). Re-record the VO →
 // re-run the alignment → everything re-times itself.
 import React from "react";
-import { AbsoluteFill, Audio, staticFile, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Audio, Img, staticFile, useCurrentFrame } from "remotion";
 import { useFonts } from "../inkbeat/core/frame";
 import CAPS_JSON from "./ep1-caps.json";
 import WORDS_JSON from "./ep1-words.json";
@@ -1867,22 +1867,15 @@ const SCENES: [string, SC][] = [
 // scene i runs from just before its line to just before the next scene's line
 const RANGES = SCENES.map(([p], i) => [i === 0 ? 0 : T(p) - 0.25, i + 1 < SCENES.length ? T(SCENES[i + 1][0]) - 0.25 : END] as const);
 
-/** the end card after the last line */
+/** the end card after the last line: the channel's profile picture */
 const EndCard: React.FC<{ t: number }> = ({ t }) => {
-  const a = T("Just a little later") + 1.6;
-  const o = on(t, a, 0.5);
+  const o = on(t, T("Just a little later") + 1.6, 0.5);
   if (o <= 0) return null;
   return (
-    <g style={{ opacity: o }}>
-      <rect width={1920} height={1080} fill={PAPER} />
-      <circle cx={960} cy={470} r={120} fill={GOLD} stroke={INK} strokeWidth={8} />
-      <Txt x={960} y={510} size={120}>
-        C
-      </Txt>
-      <Txt x={960} y={700} size={80}>
-        COINFLIP MIND
-      </Txt>
-    </g>
+    <AbsoluteFill style={{ background: PAPER, opacity: o, alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 40 }}>
+      <Img src={staticFile("coinflip/pfp.png")} style={{ width: 420, height: 420, borderRadius: "50%", border: `8px solid ${INK}`, transform: `scale(${0.94 + 0.06 * o})` }} />
+      <div style={{ fontFamily: "Poppins", fontWeight: 800, fontSize: 80, color: INK }}>COINFLIP MIND</div>
+    </AbsoluteFill>
   );
 };
 
@@ -1904,8 +1897,8 @@ export const Ep1: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
             ) : null;
           })}
         </g>
-        <EndCard t={t} />
       </svg>
+      <EndCard t={t} />
       {audio ? <Audio src={staticFile("coinflip/coinflip-ep1-vo.wav")} /> : null}
     </AbsoluteFill>
   );
