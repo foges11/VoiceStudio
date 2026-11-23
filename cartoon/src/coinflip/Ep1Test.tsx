@@ -2,7 +2,7 @@
 // paper, ink outlines, one "you" character, big words, three accent colors. The narration is shown as captions
 // (placeholders until the voice-over exists); timings assume ~150 wpm.
 import React from "react";
-import { AbsoluteFill, useCurrentFrame } from "remotion";
+import { AbsoluteFill, useCurrentFrame, useVideoConfig } from "remotion";
 import { useFonts } from "../inkbeat/core/frame";
 
 export const EP1T_FPS = 30;
@@ -41,10 +41,10 @@ const LINES: [number, number, string][] = [
 
 // ------------------------------------------------------------------ drawing pieces (SVG, user units = px)
 export type Mood = "happy" | "neutral" | "strain" | "worried";
-export const Face: React.FC<{ mood: Mood }> = ({ mood }) => (
+export const Face: React.FC<{ mood: Mood; blink?: number }> = ({ mood, blink = 1 }) => (
   <g>
-    <circle cx={-26} cy={-8} r={9} fill={INK} />
-    <circle cx={26} cy={-8} r={9} fill={INK} />
+    <ellipse cx={-26} cy={-8} rx={9} ry={9 * blink} fill={INK} />
+    <ellipse cx={26} cy={-8} rx={9} ry={9 * blink} fill={INK} />
     {mood === "happy" ? <path d="M -30 28 Q 0 52 30 28" fill="none" stroke={INK} strokeWidth={W} strokeLinecap="round" /> : null}
     {mood === "neutral" ? <path d="M -22 34 L 22 34" stroke={INK} strokeWidth={W} strokeLinecap="round" /> : null}
     {mood === "worried" ? <path d="M -24 40 Q 0 26 24 40" fill="none" stroke={INK} strokeWidth={W} strokeLinecap="round" /> : null}
@@ -71,7 +71,15 @@ export const Person: React.FC<{ x: number; y: number; s?: number; mood: Mood; ha
   old = false,
   shirt = "#6c8cff",
   children,
-}) => (
+}) => {
+  // idle life: a slow breath (head bob) and a blink every ~4 s, phase-shifted per character so they never sync
+  const { fps } = useVideoConfig();
+  const t = useCurrentFrame() / fps;
+  const seed = (x * 0.013 + y * 0.007) % 4;
+  const breath = Math.sin((2 * Math.PI * (t + seed)) / 3.4);
+  const ph = (t + seed * 1.7) % 4.2;
+  const blink = ph < 0.14 ? Math.abs(ph - 0.07) / 0.07 : 1;
+  return (
   <g transform={`translate(${x} ${y}) scale(${s})`} strokeLinejoin="round">
     {/* legs */}
     <path d="M -30 40 L -36 150 M 30 40 L 36 150" stroke={INK} strokeWidth={W + 3} strokeLinecap="round" />
@@ -83,7 +91,7 @@ export const Person: React.FC<{ x: number; y: number; s?: number; mood: Mood; ha
     <circle cx={hands[0][0]} cy={hands[0][1]} r={14} fill={SKIN} stroke={INK} strokeWidth={W - 2} />
     <circle cx={hands[1][0]} cy={hands[1][1]} r={14} fill={SKIN} stroke={INK} strokeWidth={W - 2} />
     {/* head */}
-    <g transform="translate(0 -200)">
+    <g transform={`translate(0 ${-200 + 3 * breath})`}>
       <circle r={82} fill={SKIN} stroke={INK} strokeWidth={W} />
       {old ? (
         <>
@@ -95,11 +103,12 @@ export const Person: React.FC<{ x: number; y: number; s?: number; mood: Mood; ha
       ) : (
         <path d="M -78 -22 Q -60 -96 0 -86 Q 60 -96 78 -22 Q 40 -60 0 -56 Q -40 -60 -78 -22 Z" fill="#3b2a20" stroke={INK} strokeWidth={W - 2} />
       )}
-      <Face mood={mood} />
+      <Face mood={mood} blink={Math.max(0.1, blink)} />
     </g>
     {children}
   </g>
-);
+  );
+};
 
 export const Bill: React.FC<{ x: number; y: number; s?: number; r?: number }> = ({ x, y, s = 1, r = 0 }) => (
   <g transform={`translate(${x} ${y}) rotate(${r}) scale(${s})`}>

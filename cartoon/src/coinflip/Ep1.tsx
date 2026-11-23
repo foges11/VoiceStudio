@@ -3,7 +3,7 @@
 // ep1-caps.json (script lines aligned to the VO), sub-beats from ep1-words.json (whisper word times). Re-record the VO →
 // re-run the alignment → everything re-times itself.
 import React from "react";
-import { AbsoluteFill, Audio, Img, staticFile, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Audio, Img, Sequence, staticFile, useCurrentFrame } from "remotion";
 import { useFonts } from "../inkbeat/core/frame";
 import CAPS_JSON from "./ep1-caps.json";
 import WORDS_JSON from "./ep1-words.json";
@@ -1891,6 +1891,64 @@ const EndCard: React.FC<{ t: number }> = ({ t }) => {
   );
 };
 
+// sound effects on the visual beats they belong to (same anchors as the scenes); quiet, under the voice
+type Sfx = "pop" | "tick" | "swoosh" | "cash" | "tap";
+const SFX_VOL: Record<Sfx, number> = { pop: 0.18, tick: 0.22, swoosh: 0.16, cash: 0.2, tap: 0.25 };
+const sfxEvents = (): [number, Sfx][] => {
+  const pause = T("Seriously.") + 0.5;
+  const ev: [number, Sfx][] = [
+    [1.4, "swoosh"],
+    [T("Why does"), "pop"],
+    [T("Tap, tap") + 0.05, "tap"],
+    [T("Tap, tap") + 0.35, "tap"],
+    [TW("stranger", T("Your brain thinks")), "pop"],
+    [T("But that's not") + 0.9, "pop"],
+    [TW("brain", T("In this video")), "pop"],
+    [T("A five-second"), "pop"],
+    [T("The trick"), "pop"],
+    [T("And one rule"), "pop"],
+    [T("this month, I'll save"), "pop"],
+    [TW("nothing", T("By the 30th")), "pop"],
+    [T("Sam is normal"), "pop"],
+    [T("Themselves today."), "pop"],
+    [T("Themselves in ten"), "pop"],
+    [T("A celebrity today."), "pop"],
+    [T("And that same celebrity"), "pop"],
+    [TW("someone", T("To your brain")), "pop"],
+    [TW("lazy", T("So when Sam skips")), "pop"],
+    [T("It takes five"), "pop"],
+    [pause, "tick"],
+    [pause + 1, "tick"],
+    [pause + 2, "tick"],
+    [TW("shrunk", T("And distance can")), "swoosh"],
+    [TW("fight", T("you need to see")), "pop"],
+    [TW("instant", T("Because the reward")), "pop"],
+    [TW("reward", T("You give something")), "swoosh"],
+    [T("That's not a fair") + 0.2, "pop"],
+    [T("One tap to buy"), "pop"],
+    [T("Your card already"), "pop"],
+    [T('"Arrives'), "pop"],
+    [T('"Pay later in four'), "pop"],
+    [T("it hands the cost"), "swoosh"],
+    [TW("2", T("One $40 delivery") + 1.2), "pop"],
+    [TW("262", T("By 65")), "cash"],
+    [TW("140", T("Waiting ten years")), "pop"],
+    [T("So it never counts") + 0.5, "pop"],
+    [T("so don't treat") + 0.4, "pop"],
+    [T("So they designed") + 0.2, "pop"],
+    [T("78%"), "cash"],
+    [TW("13", T("Their average savings")), "cash"],
+    [TW("650", T("that's $650")), "cash"],
+    [TW("Autopilot", T("Call it the Autopilot")), "pop"],
+    [TW("wins", T("And right-now you wins.")), "pop"],
+    [TW("transfer", T("One:") + 0.5), "swoosh"],
+    [T("send part of it"), "swoosh"],
+    [T("It's you."), "pop"],
+  ];
+  return ev.sort((a, b) => a[0] - b[0]);
+};
+const SFX = sfxEvents();
+
 export const Ep1: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
   const ready = useFonts();
   const t = useCurrentFrame() / EP1_FPS;
@@ -1902,8 +1960,10 @@ export const Ep1: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
           {SCENES.map(([, S], i) => {
             const [a, b] = RANGES[i];
             const op = i === 0 ? clamp((b - t) / 0.25) : win(t, a, b);
+            // slow push-in across each scene (about 3%) so no shot sits frozen
+            const k = 1 + 0.03 * clamp((t - a) / Math.max(1, b - a));
             return op > 0 ? (
-              <g key={i} style={{ opacity: op }}>
+              <g key={i} style={{ opacity: op }} transform={`translate(960 480) scale(${k}) translate(-960 -480)`}>
                 <S t={t} />
               </g>
             ) : null;
@@ -1912,6 +1972,13 @@ export const Ep1: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
       </svg>
       <EndCard t={t} />
       {audio ? <Audio src={staticFile("coinflip/coinflip-ep1-vo.wav")} /> : null}
+      {audio
+        ? SFX.map(([at, k], i) => (
+            <Sequence key={i} from={Math.round(at * EP1_FPS)} durationInFrames={30}>
+              <Audio src={staticFile(`coinflip/sfx/${k}.wav`)} volume={SFX_VOL[k]} />
+            </Sequence>
+          ))
+        : null}
     </AbsoluteFill>
   );
 };
