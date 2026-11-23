@@ -334,7 +334,7 @@ const Roadmap: SC = ({ t }) => {
             <g>
               <Jar x={x} y={540} label="" />
               <Txt x={x} y={545} size={64} color={GREEN}>
-                ≈4×
+                4×
               </Txt>
             </g>
           ) : null}
@@ -365,7 +365,7 @@ const MeetSam: SC = ({ t }) => {
       </g>
       <g style={pop(t, TW("25", a))}>
         <Txt x={760} y={300} size={56} color={BLUE}>
-          AGE 25 · HAS A JOB
+          AGE 25, HAS A JOB
         </Txt>
       </g>
       <Txt x={760} y={170} size={30} weight={600} color={GREY} style={{ opacity: on(t, a + 0.6) }}>
@@ -451,7 +451,7 @@ const Scanner: SC = ({ t }) => {
     <g>
       <g style={pop(t, a + 0.2)}>
         <Txt x={960} y={190} size={60}>
-          STANFORD · 2009
+          STANFORD, 2009
         </Txt>
       </g>
       <g style={{ opacity: on(t, a + 0.8) }}>
@@ -543,7 +543,10 @@ const FutureBrain: SC = ({ t }) => {
         <LitBrain x={1300} y={460} s={0.95} glow={0.25 * on(t, b + 0.6, 0.6)} label="YOU" sub="IN 10 YEARS" />
       </g>
       <g style={pop(t, TW("celebrity", b))}>
-        <Big x={960} y={500} text="≈" size={200} color={GOLD} />
+        <g fill="none" stroke={GOLD} strokeWidth={22} strokeLinecap="round">
+          <path d="M 890 420 Q 925 390 960 420 T 1030 420" />
+          <path d="M 890 480 Q 925 450 960 480 T 1030 480" />
+        </g>
       </g>
     </g>
   );
@@ -825,7 +828,7 @@ const Opposite: SC = ({ t }) => {
       </Txt>
       <path d="M 560 760 L 1360 760" stroke={INK} strokeWidth={W} strokeDasharray="20 16" />
       <g style={{ opacity: on(t, a) }}>
-        <Coin x={560} y={520} r={50} label="−$" />
+        <Coin x={560} y={520} r={50} label="-$" />
       </g>
       <Stranger x={1500} y={720} s={0.8} />
       <g style={{ opacity: on(t, TW("20", T("In twenty"))) }}>
@@ -1074,7 +1077,7 @@ const Chart: SC = ({ t }) => {
       <g style={pop(t, TW("140", gap))}>
         <rect x={ax(45) - 230} y={300} width={460} height={110} rx={20} fill={PAPER} stroke={RED} strokeWidth={10} />
         <Txt x={ax(45)} y={375} size={60} color={RED}>
-          −$140,000
+          -$140,000
         </Txt>
       </g>
     </g>
@@ -1137,7 +1140,7 @@ const Aged: SC = ({ t }) => {
     <g>
       <g style={pop(t, a + 0.2)}>
         <Txt x={960} y={170} size={60}>
-          2011 · AGED PHOTOS
+          2011: AGED PHOTOS
         </Txt>
       </g>
       <g style={{ opacity: on(t, TW("photos", b)) }}>
@@ -1720,7 +1723,7 @@ const Step4: SC = ({ t }) => {
         <g style={{ opacity: 1 - del }}>
           <rect x={-120} y={-150} width={240} height={110} rx={14} fill={BLUE} stroke={INK} strokeWidth={4} />
           <Txt x={0} y={-82} size={30} color="#fff">
-            •••• saved
+            SAVED CARD
           </Txt>
         </g>
         <Txt x={0} y={-80} size={28} color={RED} style={{ opacity: del * (1 - on(t, ex)) }}>
@@ -1729,11 +1732,11 @@ const Step4: SC = ({ t }) => {
         <g style={{ opacity: on(t, ex) }}>
           <rect x={-120} y={-150} width={240} height={60} rx={10} fill="#fff" stroke={INK} strokeWidth={4} />
           <Txt x={-100} y={-110} size={24} weight={600} anchor="start" color={GREY}>
-            Card number…
+            Card number
           </Txt>
           <rect x={-120} y={-75} width={240} height={60} rx={10} fill="#fff" stroke={INK} strokeWidth={4} />
           <Txt x={-100} y={-35} size={24} weight={600} anchor="start" color={GREY}>
-            Expiry, CVC…
+            Expiry, CVC
           </Txt>
         </g>
       </Phone>
@@ -1741,7 +1744,7 @@ const Step4: SC = ({ t }) => {
         <Person x={1360} y={720} s={0.85} mood="happy" old />
         <Bubble x={1360} y={300} w={300} h={110}>
           <Txt x={1360} y={320} size={50}>
-            Hm…
+            Hm...
           </Txt>
         </Bubble>
       </g>
