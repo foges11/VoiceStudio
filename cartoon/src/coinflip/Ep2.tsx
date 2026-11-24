@@ -2199,33 +2199,33 @@ const EV = EV_JSON as unknown as Record<string, { w: number; h: number; hl: [num
 const EVIDENCE: EvDef[] = [
   { id: "sd2005", a: T("In 2005") + 0.9, b: T("When one cent changed the first") - 0.2, hl: T("In 2005") + 2.4, source: "SCIENCEDAILY, 2005 (THOMAS & MORWITZ)", call: "$3.00 -> $2.99" },
   { id: "livesci", a: T("They raised the price by five") - 0.1, b: T("Because a 9 at the end") - 0.1, hl: T("They raised the price by five") + 0.5, source: "LIVE SCIENCE (ANDERSON & SIMESTER)", call: "+1/3 SALES" },
-  { id: "jck", a: T("The company lost almost") - 0.1, b: T("And the CEO admitted") + 0.1, hl: T("The company lost almost") + 0.3, source: "JCK, FEB 2013", call: "-$1 BILLION", zoom: 1.12 },
+  { id: "jck", a: T("The company lost almost") - 0.1, b: T("And the CEO admitted") + 0.1, hl: T("The company lost almost") + 0.3, source: "JCK, FEB 2013", call: "-$1 BILLION", zoom: 1.08 },
   { id: "sd2015", a: T("In 2015, researchers") + 0.3, b: T("When people were buying a camera") - 0.15, hl: T("In 2015, researchers") + 1.6, source: "SCIENCEDAILY, 2015 (WADHWA & ZHANG)", call: "$100 VS $98.76" },
   { id: "nber", a: T("Economists looked at more") + 0.2, b: T("People whose whole job") - 0.1, hl: T("Economists looked at more") + 1.4, source: "NBER WORKING PAPER 17030", call: "22 MILLION CARS" },
   { id: "nber210", a: T("One extra mile.") - 0.1, b: T("Because 79,999 reads") + 1.8, hl: T("One extra mile.") + 0.6, source: "NBER (LACETERA, POPE & SYDNOR)", call: "+$210" },
-  { id: "stat", a: T("researchers looked at about 70,000") - 0.1, b: T("They compared people") - 0.15, hl: T("researchers looked at about 70,000") + 0.6, source: "STAT NEWS, FEB 2020", call: "SAME TRICK?", zoom: 1.1 },
+  { id: "stat", a: T("researchers looked at about 70,000") - 0.1, b: T("They compared people") - 0.15, hl: T("researchers looked at about 70,000") + 0.6, source: "STAT NEWS, FEB 2020", call: "SAME TRICK?", zoom: 1.06 },
 ];
 const Evidence: React.FC<{ t: number }> = ({ t }) => {
   const e = EVIDENCE.find((x) => t >= x.a && t < x.b);
   if (!e) return null;
   const d = EV[e.id];
   const o = clamp((t - e.a) / 0.3) * clamp((e.b - t) / 0.3);
-  const k = 1500 / d.w; // display scale of the card
+  const k = Math.min(1150 / d.w, 700 / d.h); // display scale: about 60% of the frame, the scene stays visible
   const cw = d.w * k;
   const ch = d.h * k;
-  const x0 = (1920 - cw) / 2;
-  const y0 = (1080 - ch) / 2;
+  const x0 = 1920 - cw - 150;
+  const y0 = (1080 - ch) / 2 - 20;
   const u = d.hl.reduce((m, r) => [Math.min(m[0], r[0]), Math.min(m[1], r[1]), Math.max(m[2], r[0] + r[2]), Math.max(m[3], r[1] + r[3])], [1e9, 1e9, -1e9, -1e9]);
   const cx = x0 + ((u[0] + u[2]) / 2) * k;
   const cy = y0 + ((u[1] + u[3]) / 2) * k;
-  const zMax = e.zoom ?? Math.min(1.9, Math.max(1.15, 1600 / ((u[2] - u[0]) * k)));
+  const zMax = e.zoom ?? Math.min(1.25, Math.max(1.08, 1100 / ((u[2] - u[0]) * k)));
   const z = 1 + (zMax - 1) * inOut((t - e.a - 0.5) / 1.3);
   const slide = ease((t - e.a) / 0.45);
   const lines = d.hl.length;
   const per = Math.min(0.45, 1.6 / lines);
   return (
     <AbsoluteFill style={{ opacity: o }}>
-      <AbsoluteFill style={{ background: "rgba(27,31,46,0.55)" }} />
+      <AbsoluteFill style={{ background: "rgba(27,31,46,0.22)" }} />
       <div style={{ position: "absolute", inset: 0, transformOrigin: `${cx}px ${cy}px`, transform: `scale(${z}) translate(0px, ${(1 - slide) * 60}px)` }}>
         <div style={{ position: "absolute", left: x0, top: y0, width: cw, height: ch, borderRadius: 18, overflow: "hidden", boxShadow: "0 24px 60px rgba(0,0,0,0.35)", transform: "rotate(-0.6deg)", background: "#fff" }}>
           <Img src={staticFile(`coinflip/ev/${e.id}.png`)} style={{ width: cw, height: ch }} />
