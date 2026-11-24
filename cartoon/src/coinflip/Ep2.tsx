@@ -14,7 +14,7 @@ import { Big, Brain, clamp, ease, GOLD, GREEN, INK, inOut, on, PAPER, Person, RE
 export const EP2_FPS = 30;
 const CAPS = CAPS_JSON as unknown as [number, number, string][];
 const WORDS = WORDS_JSON as unknown as [string, number, number][];
-const END = 456.6;
+const END = 473.4;
 export const EP2_FRAMES = Math.ceil(END * EP2_FPS);
 
 const BLUE = "#6c8cff";
@@ -50,6 +50,18 @@ const In: React.FC<{ t: number; at: number; dx?: number; dy?: number; d?: number
 };
 /** gentle idle bob so nothing sits frozen */
 const bob = (t: number, k = 0, a = 6) => a * Math.sin(t * 1.7 + k);
+
+/** a joke cut-in: covers the scene with paper for [a, b) */
+const Cut: React.FC<{ t: number; a: number; b: number; children: React.ReactNode }> = ({ t, a, b, children }) => {
+  const o = clamp((t - a) / 0.2) * clamp((b - t) / 0.2);
+  if (o <= 0) return null;
+  return (
+    <g opacity={o}>
+      <rect x={-200} y={-200} width={2320} height={1480} fill={PAPER} />
+      {children}
+    </g>
+  );
+};
 
 // ------------------------------------------------------------------ drawing pieces
 const POSES: Record<string, [XY, XY]> = {
@@ -459,6 +471,32 @@ const S_WorksOn: SC = ({ t }) => {
           ) : null}
         </In>
       ))}
+      <Cut t={t} a={T("Be honest.") - 0.1} b={T("It works on people who price") - 0.15}>
+        <Txt x={960} y={200} size={64}>
+          BE HONEST.
+        </Txt>
+        <g transform="translate(520 560)">
+          <rect x={-110} y={-200} width={220} height={400} rx={36} fill={INK} />
+          <rect x={-92} y={-178} width={184} height={356} rx={22} fill="#7ad7ff" />
+          <Txt x={0} y={250} size={44}>
+            1 PHONE
+          </Txt>
+        </g>
+        {[0, 1, 2, 3, 4, 5].map((k) => (
+          <In key={k} t={t} at={T("Be honest.") + 0.4 + k * 0.18} dy={-80}>
+            <g transform={`translate(${1150 + k * 75} ${560 - k * 8}) rotate(${-14 + k * 6})`}>
+              <rect x={-115} y={-205} width={230} height={410} rx={40} fill={[RED, GOLD, GREEN, BLUE, "#b07cff", "#ff9f6e"][k]} stroke={INK} strokeWidth={6} />
+              <circle cx={-60} cy={-150} r={22} fill={INK} opacity={0.5} />
+            </g>
+          </In>
+        ))}
+        <In t={t} at={T("Be honest.") + 1.6} dy={0}>
+          <Txt x={1340} y={800} size={44}>
+            6 CASES AT $9.99
+          </Txt>
+        </In>
+        <Stamp x={960} y={890} text="ONE PHONE." t={t} at={T("You have one phone.")} size={60} rot={-4} />
+      </Cut>
     </g>
   );
 };
@@ -825,9 +863,13 @@ const S_Busy: SC = ({ t }) => {
         <g transform="translate(960 560)">
           <rect x={-170} y={-300} width={340} height={600} rx={46} fill={INK} stroke="#fff" strokeWidth={4} />
           <rect x={-148} y={-272} width={296} height={544} rx={28} fill="#fff" />
-          <rect x={-110} y={-220} width={220} height={190} rx={16} fill={GOLD} />
-          <Txt x={0} y={40} size={56}>
-            $24.99
+          <rect x={-110} y={-220} width={220} height={190} rx={16} fill="#7ad7ff" />
+          <path d="M -80 -90 Q -80 -60 -50 -60 L 50 -60 Q 80 -60 80 -90 Z" fill="#fff" stroke={INK} strokeWidth={4} />
+          <Txt x={0} y={-130} size={26}>
+            INFLATABLE HOT TUB
+          </Txt>
+          <Txt x={0} y={40} size={52}>
+            $499.99
           </Txt>
           <rect x={-120} y={110} width={240} height={90} rx={45} fill={t > tired + 2.5 ? GREEN : RED} />
           <Txt x={0} y={168} size={34} color="#fff">
@@ -835,6 +877,14 @@ const S_Busy: SC = ({ t }) => {
           </Txt>
           <circle cx={60} cy={175} r={34} fill={SKIN} stroke={INK} strokeWidth={5} opacity={on(t, tired + 1.5)} />
         </g>
+        <In t={t} at={T("Which is when all the best")} dy={-20} out={tired}>
+          <Txt x={1500} y={420} size={40} color={SOFT}>
+            PEAK DECISION
+          </Txt>
+          <Txt x={1500} y={470} size={40} color={SOFT}>
+            HOURS
+          </Txt>
+        </In>
         <In t={t} at={tired} dy={-20}>
           <Txt x={420} y={420} size={44} color={SOFT}>
             TIRED.
@@ -1202,8 +1252,29 @@ const S_JCPFall: SC = ({ t }) => {
         {[0, 1, 2].map((k) => (
           <Guy key={k} x={300 + k * 190} y={720} s={0.6} mood="worried" shirt={[RED, BLUE, GREEN][k]} />
         ))}
-        <Txt x={490} y={330} size={52} color={RED}>
+        <Txt x={490} y={330} size={52} color={RED} style={{ opacity: 1 - on(t, T("People literally missed")) }}>
           CUSTOMERS HATED IT
+        </Txt>
+      </In>
+      {["BRING", "BACK THE", "FAKE SALES!"].map((w, k) => (
+        <In key={k} t={t} at={T("People literally missed") + 0.15 * k} dy={50} out={TW("year", T("That year, sales"))}>
+          <g transform={`translate(${300 + k * 190} ${400 + bob(t * 3, k, 10)}) rotate(${-6 + k * 6})`}>
+            <rect x={-4} y={20} width={8} height={150} fill={INK} />
+            <rect x={-95} y={-55} width={190} height={90} rx={10} fill="#fff" stroke={INK} strokeWidth={5} />
+            <Txt x={0} y={4} size={w.length > 8 ? 26 : 32} color={RED}>
+              {w}
+            </Txt>
+          </g>
+        </In>
+      ))}
+      <In t={t} at={TW("dumping", T("That's like dumping"))} dy={0} out={T("That year, sales")}>
+        <g transform="translate(1250 520)">
+          <path d="M 0 -30 C -40 -90 -120 -50 -90 20 L 0 100 Z" fill={RED} stroke={INK} strokeWidth={W} strokeLinejoin="round" transform="translate(-12 0) rotate(-8)" />
+          <path d="M 0 -30 C 40 -90 120 -50 90 20 L 0 100 Z" fill={RED} stroke={INK} strokeWidth={W} strokeLinejoin="round" transform="translate(12 0) rotate(8)" />
+          <path d="M 0 -30 L -14 10 L 10 40 L -6 80" fill="none" stroke={INK} strokeWidth={6} />
+        </g>
+        <Txt x={1250} y={720} size={40}>
+          "IT'S NOT YOU, IT'S YOUR PRICES"
         </Txt>
       </In>
       <In t={t} at={fell}>
@@ -1464,6 +1535,22 @@ const S_Auction: SC = ({ t }) => {
           THEIR WHOLE JOB
         </Txt>
       </In>
+      <In t={t} at={T("Professionals.") - 0.1} dy={-30} out={ridic}>
+        <rect x={680} y={560} width={560} height={80} rx={40} fill={INK} />
+        <Txt x={960} y={615} size={40} color={SOFT}>
+          PROFESSIONALS.
+        </Txt>
+      </In>
+      {[0, 1, 2].map((k) => (
+        <In key={k} t={t} at={T("With clipboards.") + k * 0.12} dy={40} out={ridic + 0.3}>
+          <g transform={`translate(${660 + k * 300 + 40} 790) rotate(${-8 + k * 8})`}>
+            <rect x={-38} y={-50} width={76} height={100} rx={8} fill="#c98a12" stroke={INK} strokeWidth={4} />
+            <rect x={-28} y={-38} width={56} height={80} fill="#fff" />
+            <rect x={-16} y={-58} width={32} height={16} rx={4} fill={GREY} stroke={INK} strokeWidth={3} />
+            <path d="M -18 -15 L 18 -15 M -18 0 L 18 0 M -18 15 L 10 15" stroke={GREY} strokeWidth={4} />
+          </g>
+        </In>
+      ))}
       <Stamp x={480} y={850} text="RIDICULOUS" t={t} at={ridic + 0.6} size={50} rot={-6} />
     </g>
   );
@@ -1793,6 +1880,14 @@ const S_Under: SC = ({ t }) => {
       <In t={t} at={worked} dy={0}>
         <Check x={1400} y={420} s={1.1} />
       </In>
+      {t > store
+        ? Array.from({ length: 36 }, (_, k) => {
+            const u = t - store;
+            const x = 1400 + ((k * 97) % 700) - 350 + 40 * Math.sin(u * 3 + k);
+            const y = 300 + u * (220 + (k % 5) * 40) - 120 + ((k * 53) % 90);
+            return y < 1000 ? <rect key={k} x={x} y={y} width={18} height={10} rx={2} fill={[RED, GOLD, GREEN, BLUE][k % 4]} transform={`rotate(${u * 300 + k * 40} ${x + 9} ${y + 5})`} /> : null;
+          })
+        : null}
       <Stamp x={1400} y={860} text="FOR THE STORE" t={t} at={store} size={60} rot={-5} />
     </g>
   );
@@ -1936,6 +2031,34 @@ const StepHead: React.FC<{ n: number; title: string; t: number; at: number }> = 
   </In>
 );
 
+const Cashier: React.FC<{ t: number }> = ({ t }) => {
+  const a = T("And yes, the cashier");
+  const them = T("Let them.");
+  return (
+    <Cut t={t} a={a - 0.1} b={T("Two: ask the round") - 0.2}>
+      <Guy x={560} y={700} mood="happy" pose="point" />
+      <Bubble x={980} y={330} w={500} h={130}>
+        <Txt x={980} y={352} size={56} color={GREEN}>
+          "TEN DOLLARS."
+        </Txt>
+      </Bubble>
+      <Guy x={1400} y={640} s={0.9} mood="neutral" shirt={GREEN} />
+      <rect x={1150} y={700} width={560} height={200} rx={14} fill="#c98a12" stroke={INK} strokeWidth={W} />
+      <Txt x={1430} y={820} size={40} color="#fff">
+        CHECKOUT
+      </Txt>
+      <In t={t} at={TW("weird", a) - 0.2} dy={0}>
+        <Bubble x={1560} y={300} w={240} h={110} tail="left">
+          <Txt x={1560} y={322} size={60}>
+            ...
+          </Txt>
+        </Bubble>
+      </In>
+      <Stamp x={960} y={880} text="LET THEM." color={GREEN} t={t} at={them} size={64} rot={-4} />
+    </Cut>
+  );
+};
+
 const S_Step1: SC = ({ t }) => {
   const a = T("One: say the real number.");
   const not1 = T('Not "nine ninety-nine."');
@@ -1964,6 +2087,7 @@ const S_Step1: SC = ({ t }) => {
           YOUR BRAIN FILES THE REAL NUMBER
         </Txt>
       </In>
+      <Cashier t={t} />
     </g>
   );
 };
