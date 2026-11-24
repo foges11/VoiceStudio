@@ -81,7 +81,7 @@ And people really like that feeling. One company learned that the hard way.
 
 ## The store that took the deals away
 
-In 2012, JCPenney decided to be honest. No more fake sales. No more coupons. Just simple, everyday prices. They called it "fair and square."
+In 2012, JCPenney decided to stop playing games with prices. No more constant sales. No more coupons. Just simple, everyday prices. They called it "fair and square."
 
 Sounds great, right?
 
