@@ -408,6 +408,9 @@ const S_YouKnew: SC = ({ t }) => {
   const all = T("Everybody knows.");
   return (
     <g>
+      <In t={t} at={T("And here's the weird part.")} out={T("You knew.") - 0.1}>
+        <Big x={960} y={520} text="HERE'S THE WEIRD PART" size={100} color={RED} />
+      </In>
       <In t={t} at={T("You knew.") - 0.1}>
         <Big x={960} y={220} text="YOU KNEW." color={GOLD} size={110} />
       </In>
@@ -534,6 +537,11 @@ const S_499: SC = ({ t }) => {
   return (
     <g>
       <rect x={0} y={0} width={1920} height={1080} fill={NIGHT} opacity={0.85 * (1 - on(t, said, 0.6))} />
+      <In t={t} at={T("$4.99.") - 0.3} dy={0} d={0.2} out={at}>
+        <Txt x={960} y={500} size={110} color={SOFT}>
+          READY?
+        </Txt>
+      </In>
       <g transform={`translate(960 470) scale(${1.6 - 0.25 * slam}) translate(-960 -470)`} opacity={slam}>
         <Tag x={960} y={470} text="$4.99" s={1.4} first={on(t, said, 0.8)} />
       </g>
@@ -1835,6 +1843,9 @@ const S_Pause: SC = ({ t }) => {
   const kick = inOut((t - skip - 0.6) / 0.6);
   return (
     <g>
+      <In t={t} at={T("But here's what it really") - 0.1} out={pen}>
+        <Big x={960} y={520} text="WHAT IT REALLY COSTS YOU" size={90} />
+      </In>
       <In t={t} at={pen} out={pause}>
         <Coin x={960} y={520} r={120} label="1c" />
         <Cross x={960} y={520} s={2.4} />
@@ -2295,7 +2306,7 @@ export const Ep2: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
       </svg>
       <Evidence t={t} />
       <EndCard t={t} />
-      {audio ? <Audio src={staticFile("coinflip/coinflip-ep2-vo.wav")} /> : null}
+      {audio ? <Audio src={staticFile("coinflip/coinflip-ep2-vo.wav")} volume={0.74} /> : null}
       {audio
         ? [...SFX, ...EVIDENCE.flatMap((e): [number, Sfx][] => [[e.a, "swoosh"], [e.hl + Math.min(0.45, 1.6 / EV[e.id].hl.length) * EV[e.id].hl.length, "pop"]])].map(([at, k], i) => (
             <Sequence key={i} from={Math.max(0, Math.round(at * EP2_FPS))} durationInFrames={30}>
