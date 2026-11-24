@@ -40,14 +40,28 @@ const LINES: [number, number, string][] = [
 ];
 
 // ------------------------------------------------------------------ drawing pieces (SVG, user units = px)
-export type Mood = "happy" | "neutral" | "strain" | "worried";
+export type Mood = "happy" | "neutral" | "strain" | "worried" | "shocked";
 export const Face: React.FC<{ mood: Mood; blink?: number }> = ({ mood, blink = 1 }) => (
   <g>
-    <ellipse cx={-26} cy={-8} rx={9} ry={9 * blink} fill={INK} />
-    <ellipse cx={26} cy={-8} rx={9} ry={9 * blink} fill={INK} />
+    {mood !== "shocked" ? (
+      <>
+        <ellipse cx={-26} cy={-8} rx={9} ry={9 * blink} fill={INK} />
+        <ellipse cx={26} cy={-8} rx={9} ry={9 * blink} fill={INK} />
+      </>
+    ) : null}
     {mood === "happy" ? <path d="M -30 28 Q 0 52 30 28" fill="none" stroke={INK} strokeWidth={W} strokeLinecap="round" /> : null}
     {mood === "neutral" ? <path d="M -22 34 L 22 34" stroke={INK} strokeWidth={W} strokeLinecap="round" /> : null}
     {mood === "worried" ? <path d="M -24 40 Q 0 26 24 40" fill="none" stroke={INK} strokeWidth={W} strokeLinecap="round" /> : null}
+    {mood === "shocked" ? (
+      <>
+        <circle cx={-26} cy={-8} r={15} fill="#fff" stroke={INK} strokeWidth={4} />
+        <circle cx={26} cy={-8} r={15} fill="#fff" stroke={INK} strokeWidth={4} />
+        <circle cx={-24} cy={-6} r={7} fill={INK} />
+        <circle cx={28} cy={-6} r={7} fill={INK} />
+        <path d="M -44 -42 Q -28 -54 -12 -44 M 44 -42 Q 28 -54 12 -44" fill="none" stroke={INK} strokeWidth={W - 1} strokeLinecap="round" />
+        <ellipse cx={0} cy={40} rx={16} ry={20} fill={INK} />
+      </>
+    ) : null}
     {mood === "strain" ? <path d="M -30 36 Q -20 26 -10 36 Q 0 46 10 36 Q 20 26 30 36" fill="none" stroke={INK} strokeWidth={W} strokeLinecap="round" /> : null}
     {mood === "strain" || mood === "worried" ? (
       <>

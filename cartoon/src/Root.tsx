@@ -14,6 +14,7 @@ import { MobRuleAvatar } from "./mob/MobRuleAvatar";
 import { MobRuleAvatar2 } from "./mob/MobRuleAvatar2";
 import { CoinflipAvatar } from "./coinflip/CoinflipAvatar";
 import { Ep1Thumb } from "./coinflip/Ep1Thumb";
+import { Ep2Thumb } from "./coinflip/Ep2Thumb";
 import { Ep2, EP2_FPS, EP2_FRAMES } from "./coinflip/Ep2";
 import { IC_FRAMES, InstaCard } from "./coinflip/InstaCard";
 import { SH1_FPS, SH1_FRAMES, Short1 } from "./coinflip/Short1";
@@ -59,6 +60,9 @@ export const Root: React.FC = () => (
       <Composition key={v} id={`CoinflipInsta-${v}`} component={InstaCard} durationInFrames={IC_FRAMES} fps={30} width={1080} height={1350} defaultProps={{ title, from, to, length: "6:40", date: "November 23, 2026" }} />
     ))}
     <Composition id="CoinflipEp2" component={Ep2} durationInFrames={EP2_FRAMES} fps={EP2_FPS} width={1920} height={1080} defaultProps={{ audio: true }} />
+    {[0, 1].map((v) => (
+      <Composition key={v} id={`CoinflipEp2Thumb-${v}`} component={Ep2Thumb} durationInFrames={1} fps={30} width={1920} height={1080} defaultProps={{ v }} />
+    ))}
     <Composition id="CoinflipEp1Test" component={Ep1Test} durationInFrames={EP1T_FRAMES} fps={EP1T_FPS} width={1920} height={1080} />
     {[0, 1, 2, 3].map((v) => (
       <Composition key={v} id={`CoinflipAvatar-${v}`} component={CoinflipAvatar} durationInFrames={1} fps={30} width={1080} height={1080} defaultProps={{ v }} />

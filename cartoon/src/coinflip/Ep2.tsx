@@ -91,7 +91,7 @@ const POSES: Record<string, [XY, XY]> = {
   ],
 };
 /** the "you" character on a soft ground shadow */
-const Guy: React.FC<{ x: number; y: number; s?: number; mood?: "happy" | "neutral" | "strain" | "worried"; pose?: keyof typeof POSES; old?: boolean; shirt?: string; children?: React.ReactNode }> = ({
+export const Guy: React.FC<{ x: number; y: number; s?: number; mood?: "happy" | "neutral" | "strain" | "worried" | "shocked"; pose?: keyof typeof POSES; old?: boolean; shirt?: string; children?: React.ReactNode }> = ({
   x,
   y,
   s = 1,
@@ -116,7 +116,7 @@ const PhoneInHand: React.FC = () => (
 );
 
 /** a price tag; `first` 0..1 makes the first digit grow and the rest fade (the left-digit effect, drawn) */
-const Tag: React.FC<{ x: number; y: number; text: string; s?: number; rot?: number; first?: number; fill?: string; color?: string }> = ({ x, y, text, s = 1, rot = 0, first = 0, fill = "#fff", color = INK }) => {
+export const Tag: React.FC<{ x: number; y: number; text: string; s?: number; rot?: number; first?: number; fill?: string; color?: string }> = ({ x, y, text, s = 1, rot = 0, first = 0, fill = "#fff", color = INK }) => {
   const w = 120 + text.length * 62;
   const i = text.search(/[0-9]/);
   return (
