@@ -7,6 +7,7 @@ import { AbsoluteFill, Audio, Img, Sequence, staticFile, useCurrentFrame } from 
 import { useFonts } from "../inkbeat/core/frame";
 import CAPS_JSON from "./ep2-caps.json";
 import WORDS_JSON from "./ep2-words.json";
+import EV_JSON from "./ev.json";
 import { Arrow, Card, Check, Coin, Cross, Stamp, StarIcon, Strike, Txt } from "./Ep1";
 import { Big, Brain, clamp, ease, GOLD, GREEN, INK, inOut, on, PAPER, Person, RED, SKIN, W, win } from "./Ep1Test";
 
@@ -1519,7 +1520,7 @@ const S_Odometer: SC = ({ t }) => {
 const S_Reads: SC = ({ t }) => {
   const a = T('Because 79,999 reads');
   const b = T('80,000 reads as');
-  const m1 = inOut((t - a - 0.8) / 0.9);
+  const m1 = inOut((t - a - 2.3) / 0.9);
   const m2 = inOut((t - b - 0.3) / 0.9);
   return (
     <g>
@@ -2190,6 +2191,76 @@ const sfx = (): [number, Sfx][] => {
 };
 const SFX = sfx();
 
+// ------------------------------------------------------------------ evidence shots: real pages (screenshotted from the
+// source sites, see the script's Sources) slide in, the camera pushes into the key line, a highlighter sweeps it, and a
+// red callout names the number. Only pages that say exactly what the voice says.
+type EvDef = { id: string; a: number; b: number; hl: number; source: string; call: string; zoom?: number };
+const EV = EV_JSON as unknown as Record<string, { w: number; h: number; hl: [number, number, number, number][] }>;
+const EVIDENCE: EvDef[] = [
+  { id: "sd2005", a: T("In 2005") + 0.9, b: T("When one cent changed the first") - 0.2, hl: T("In 2005") + 2.4, source: "SCIENCEDAILY, 2005 (THOMAS & MORWITZ)", call: "$3.00 -> $2.99" },
+  { id: "livesci", a: T("They raised the price by five") - 0.1, b: T("Because a 9 at the end") - 0.1, hl: T("They raised the price by five") + 0.5, source: "LIVE SCIENCE (ANDERSON & SIMESTER)", call: "+1/3 SALES" },
+  { id: "jck", a: T("The company lost almost") - 0.1, b: T("And the CEO admitted") + 0.1, hl: T("The company lost almost") + 0.3, source: "JCK, FEB 2013", call: "-$1 BILLION", zoom: 1.12 },
+  { id: "sd2015", a: T("In 2015, researchers") + 0.3, b: T("When people were buying a camera") - 0.15, hl: T("In 2015, researchers") + 1.6, source: "SCIENCEDAILY, 2015 (WADHWA & ZHANG)", call: "$100 VS $98.76" },
+  { id: "nber", a: T("Economists looked at more") + 0.2, b: T("People whose whole job") - 0.1, hl: T("Economists looked at more") + 1.4, source: "NBER WORKING PAPER 17030", call: "22 MILLION CARS" },
+  { id: "nber210", a: T("One extra mile.") - 0.1, b: T("Because 79,999 reads") + 1.8, hl: T("One extra mile.") + 0.6, source: "NBER (LACETERA, POPE & SYDNOR)", call: "+$210" },
+  { id: "stat", a: T("researchers looked at about 70,000") - 0.1, b: T("They compared people") - 0.15, hl: T("researchers looked at about 70,000") + 0.6, source: "STAT NEWS, FEB 2020", call: "SAME TRICK?", zoom: 1.1 },
+];
+const Evidence: React.FC<{ t: number }> = ({ t }) => {
+  const e = EVIDENCE.find((x) => t >= x.a && t < x.b);
+  if (!e) return null;
+  const d = EV[e.id];
+  const o = clamp((t - e.a) / 0.3) * clamp((e.b - t) / 0.3);
+  const k = 1500 / d.w; // display scale of the card
+  const cw = d.w * k;
+  const ch = d.h * k;
+  const x0 = (1920 - cw) / 2;
+  const y0 = (1080 - ch) / 2;
+  const u = d.hl.reduce((m, r) => [Math.min(m[0], r[0]), Math.min(m[1], r[1]), Math.max(m[2], r[0] + r[2]), Math.max(m[3], r[1] + r[3])], [1e9, 1e9, -1e9, -1e9]);
+  const cx = x0 + ((u[0] + u[2]) / 2) * k;
+  const cy = y0 + ((u[1] + u[3]) / 2) * k;
+  const zMax = e.zoom ?? Math.min(1.9, Math.max(1.15, 1600 / ((u[2] - u[0]) * k)));
+  const z = 1 + (zMax - 1) * inOut((t - e.a - 0.5) / 1.3);
+  const slide = ease((t - e.a) / 0.45);
+  const lines = d.hl.length;
+  const per = Math.min(0.45, 1.6 / lines);
+  return (
+    <AbsoluteFill style={{ opacity: o }}>
+      <AbsoluteFill style={{ background: "rgba(27,31,46,0.55)" }} />
+      <div style={{ position: "absolute", inset: 0, transformOrigin: `${cx}px ${cy}px`, transform: `scale(${z}) translate(0px, ${(1 - slide) * 60}px)` }}>
+        <div style={{ position: "absolute", left: x0, top: y0, width: cw, height: ch, borderRadius: 18, overflow: "hidden", boxShadow: "0 24px 60px rgba(0,0,0,0.35)", transform: "rotate(-0.6deg)", background: "#fff" }}>
+          <Img src={staticFile(`coinflip/ev/${e.id}.png`)} style={{ width: cw, height: ch }} />
+          {d.hl.map((r, i) => {
+            const p = clamp((t - e.hl - i * per) / per);
+            return p > 0 ? <div key={i} style={{ position: "absolute", left: r[0] * k, top: r[1] * k, width: r[2] * k * p, height: r[3] * k, background: "rgba(245,184,46,0.45)", borderRadius: 4, mixBlendMode: "multiply" }} /> : null;
+          })}
+        </div>
+      </div>
+      <div style={{ position: "absolute", left: 60, bottom: 40, background: INK, color: SOFT, fontFamily: "Poppins", fontWeight: 800, fontSize: 26, padding: "10px 22px", borderRadius: 30, letterSpacing: 1 }}>SOURCE: {e.source}</div>
+      {t > e.hl + lines * per ? (
+        <div
+          style={{
+            position: "absolute",
+            right: 70,
+            bottom: 50,
+            fontFamily: "Poppins",
+            fontWeight: 800,
+            fontSize: 64,
+            color: "#fff",
+            background: RED,
+            border: `6px solid ${INK}`,
+            borderRadius: 24,
+            padding: "8px 30px",
+            transform: `rotate(-4deg) scale(${0.85 + 0.15 * ease((t - e.hl - lines * per) / 0.25)})`,
+            boxShadow: "0 10px 0 rgba(0,0,0,0.25)",
+          }}
+        >
+          {e.call}
+        </div>
+      ) : null}
+    </AbsoluteFill>
+  );
+};
+
 const EndCard: React.FC<{ t: number }> = ({ t }) => {
   const o = on(t, T("And now you'll notice.") + 1.6, 0.5);
   if (o <= 0) return null;
@@ -2222,10 +2293,11 @@ export const Ep2: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
         </g>
         <ChapterPill t={t} />
       </svg>
+      <Evidence t={t} />
       <EndCard t={t} />
       {audio ? <Audio src={staticFile("coinflip/coinflip-ep2-vo.wav")} /> : null}
       {audio
-        ? SFX.map(([at, k], i) => (
+        ? [...SFX, ...EVIDENCE.flatMap((e): [number, Sfx][] => [[e.a, "swoosh"], [e.hl + Math.min(0.45, 1.6 / EV[e.id].hl.length) * EV[e.id].hl.length, "pop"]])].map(([at, k], i) => (
             <Sequence key={i} from={Math.max(0, Math.round(at * EP2_FPS))} durationInFrames={30}>
               <Audio src={staticFile(`coinflip/sfx/${k}.wav`)} volume={VOL[k]} />
             </Sequence>
