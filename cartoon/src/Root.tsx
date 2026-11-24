@@ -14,6 +14,7 @@ import { MobRuleAvatar } from "./mob/MobRuleAvatar";
 import { MobRuleAvatar2 } from "./mob/MobRuleAvatar2";
 import { CoinflipAvatar } from "./coinflip/CoinflipAvatar";
 import { Ep1Thumb } from "./coinflip/Ep1Thumb";
+import { IC_FRAMES, InstaCard } from "./coinflip/InstaCard";
 import { SH1_FPS, SH1_FRAMES, Short1 } from "./coinflip/Short1";
 import { Ep1, EP1_FPS, EP1_FRAMES } from "./coinflip/Ep1";
 import { EP1T_FPS, EP1T_FRAMES, Ep1Test } from "./coinflip/Ep1Test";
@@ -47,6 +48,15 @@ export const Root: React.FC = () => (
       <Composition key={v} id={`CoinflipEp1Thumb-${v}`} component={Ep1Thumb} durationInFrames={1} fps={30} width={1920} height={1080} defaultProps={{ v }} />
     ))}
     <Composition id="CoinflipShort1" component={Short1} durationInFrames={SH1_FRAMES} fps={SH1_FPS} width={1080} height={1920} defaultProps={{ audio: true, captions: true }} />
+    {(
+      [
+        ["Your brain thinks future you is a stranger", 22.0, 24.34],
+        ["Nobody saves money for a stranger", 165.0, 168.3],
+        ["Waiting 10 years cost him $140,000", 225.0, 230.8],
+      ] as const
+    ).map(([title, from, to], v) => (
+      <Composition key={v} id={`CoinflipInsta-${v}`} component={InstaCard} durationInFrames={IC_FRAMES} fps={30} width={1080} height={1350} defaultProps={{ title, from, to, length: "6:40", date: "November 23, 2026" }} />
+    ))}
     <Composition id="CoinflipEp1Test" component={Ep1Test} durationInFrames={EP1T_FRAMES} fps={EP1T_FPS} width={1920} height={1080} />
     {[0, 1, 2, 3].map((v) => (
       <Composition key={v} id={`CoinflipAvatar-${v}`} component={CoinflipAvatar} durationInFrames={1} fps={30} width={1080} height={1080} defaultProps={{ v }} />
