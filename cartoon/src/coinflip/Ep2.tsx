@@ -38,7 +38,7 @@ type XY = [number, number];
 
 // ------------------------------------------------------------------ motion helpers
 /** slides in from (dx,dy) and fades in at `at`; optional fade out at `out` */
-const In: React.FC<{ t: number; at: number; dx?: number; dy?: number; d?: number; out?: number; children: React.ReactNode }> = ({ t, at, dx = 0, dy = 40, d = 0.45, out, children }) => {
+export const In: React.FC<{ t: number; at: number; dx?: number; dy?: number; d?: number; out?: number; children: React.ReactNode }> = ({ t, at, dx = 0, dy = 40, d = 0.45, out, children }) => {
   const e = ease((t - at) / d);
   const o = e * (out === undefined ? 1 : clamp((out - t) / 0.3));
   if (o <= 0) return null;
@@ -49,7 +49,7 @@ const In: React.FC<{ t: number; at: number; dx?: number; dy?: number; d?: number
   );
 };
 /** gentle idle bob so nothing sits frozen */
-const bob = (t: number, k = 0, a = 6) => a * Math.sin(t * 1.7 + k);
+export const bob = (t: number, k = 0, a = 6) => a * Math.sin(t * 1.7 + k);
 
 /** a joke cut-in: covers the scene with paper for [a, b) */
 const Cut: React.FC<{ t: number; a: number; b: number; children: React.ReactNode }> = ({ t, a, b, children }) => {
@@ -264,7 +264,7 @@ const Hospital: React.FC<{ x: number; y: number; s?: number }> = ({ x, y, s = 1 
   </g>
 );
 
-const Heart: React.FC<{ x: number; y: number; s?: number; fill?: string }> = ({ x, y, s = 1, fill = RED }) => (
+export const Heart: React.FC<{ x: number; y: number; s?: number; fill?: string }> = ({ x, y, s = 1, fill = RED }) => (
   <path transform={`translate(${x} ${y}) scale(${s})`} d="M 0 -30 C -40 -90 -120 -50 -90 20 L 0 100 L 90 20 C 120 -50 40 -90 0 -30 Z" fill={fill} stroke={INK} strokeWidth={W} strokeLinejoin="round" />
 );
 
@@ -356,7 +356,7 @@ const Bars: React.FC<{ x: number; y: number; vals: number[]; labels: string[]; p
   );
 };
 
-const Bubble: React.FC<{ x: number; y: number; w: number; h?: number; tail?: "left" | "right" | "down"; children: React.ReactNode; fill?: string }> = ({ x, y, w, h = 120, tail = "left", children, fill = "#fff" }) => {
+export const Bubble: React.FC<{ x: number; y: number; w: number; h?: number; tail?: "left" | "right" | "down"; children: React.ReactNode; fill?: string }> = ({ x, y, w, h = 120, tail = "left", children, fill = "#fff" }) => {
   const tx = tail === "left" ? x - w / 2 + 70 : tail === "right" ? x + w / 2 - 70 : x;
   const d = tail === "left" ? -50 : tail === "right" ? 50 : 0;
   return (
