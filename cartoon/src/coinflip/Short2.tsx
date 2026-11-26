@@ -47,13 +47,52 @@ const Suspects: React.FC<{ t: number; glow?: number; spot?: number }> = ({ t, gl
   </g>
 );
 
+/** "you" in the middle holding a glowing dream, the four people you told around you */
+const Told: React.FC<{ t: number; at: number; glow: number; dim: number }> = ({ t, at, glow, dim }) => {
+  const pos: [number, number][] = [
+    [220, 760],
+    [860, 760],
+    [220, 1250],
+    [860, 1250],
+  ];
+  const pulse = 1 + 0.06 * Math.sin(t * 5);
+  return (
+    <g>
+      {/* the dream */}
+      <g opacity={1 - 0.65 * dim}>
+        <circle cx={540} cy={760} r={150 * pulse} fill={GOLD} opacity={0.25} />
+        <circle cx={540} cy={760} r={80} fill={GOLD} stroke={INK} strokeWidth={7} />
+        {[0, 1, 2, 3, 4, 5].map((k) => {
+          const ang = t * 1.4 + (k * Math.PI) / 3;
+          return <StarIcon key={k} x={540 + 125 * Math.cos(ang)} y={760 + 125 * Math.sin(ang)} r={16} />;
+        })}
+      </g>
+      <Guy x={540} y={1180} s={0.95} mood={dim > 0.5 ? "worried" : "happy"} pose="up" />
+      {pos.map(([x, y], k) => (
+        <In key={k} t={t} at={at + 0.1 * k} dx={x < 540 ? -120 : 120} dy={0} d={0.35}>
+          <g transform={`translate(0 ${bob(t, k, 5)})`}>
+            <Stranger x={x} y={y} s={0.6} />
+            {glow > 0 ? <circle cx={x} cy={y - 120} r={60} fill="none" stroke={RED} strokeWidth={9} opacity={glow * (0.6 + 0.4 * Math.sin(t * 8 + k))} /> : null}
+            <g transform={`translate(${x + (x < 540 ? 70 : -70)} ${y - 230})`}>
+              <rect x={-60} y={-34} width={120} height={68} rx={30} fill="#fff" stroke={INK} strokeWidth={5} />
+              <Txt x={0} y={14} size={44}>
+                ...
+              </Txt>
+            </g>
+          </g>
+        </In>
+      ))}
+    </g>
+  );
+};
+
 const S_Hook: SC = ({ t }) => (
   <g>
     <g transform={`translate(540 290) scale(${1 + 0.08 * Math.max(0, 1 - t / 0.3)}) translate(-540 -290)`}>
       <Big x={540} y={330} text="WHO DID" color={INK} size={130} />
       <Big x={540} y={470} text="YOU TELL?" color={RED} size={130} />
     </g>
-    <Suspects t={t} glow={on(t, TW("reason", 1), 0.4)} />
+    <Told t={t} at={-1} glow={on(t, TW("reason", 1), 0.4)} dim={on(t, TW("never", 1), 0.5)} />
   </g>
 );
 
@@ -337,7 +376,7 @@ const S_Again: SC = ({ t }) => (
   <g>
     <Big x={540} y={330} text="WHO DID" color={INK} size={130} />
     <Big x={540} y={470} text="YOU TELL?" color={RED} size={130} />
-    <Suspects t={t} glow={on(t, T("Now think again.") + 1.0, 0.4)} />
+    <Told t={t} at={-1} glow={on(t, T("Now think again.") + 1.0, 0.4)} dim={0} />
   </g>
 );
 
