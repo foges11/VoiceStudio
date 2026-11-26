@@ -8,7 +8,7 @@ import { useFonts } from "../inkbeat/core/frame";
 import CAPS_JSON from "./short3-caps.json";
 import WORDS_JSON from "./short3-capwords.json";
 import { Check, Coin, Stamp, Txt } from "./Ep1";
-import { bob, Guy, In } from "./Ep2";
+import { Guy, In } from "./Ep2";
 import { Big, clamp, ease, GOLD, GREEN, INK, inOut, on, PAPER, RED, win } from "./Ep1Test";
 
 export const SH3_FPS = 30;
@@ -69,22 +69,57 @@ const Options: React.FC<{ t: number; at: number; lock?: number }> = ({ t, at, lo
   </g>
 );
 
-const S_Hook: SC = ({ t }) => (
-  <g>
-    <g transform={`translate(540 300) scale(${1 + 0.08 * Math.max(0, 1 - t / 0.3)}) translate(-540 -300)`}>
-      <Big x={540} y={330} text="STOP PAYING" color={INK} size={110} />
-      <Big x={540} y={460} text="THE MINIMUM" color={RED} size={110} />
+const S_Hook: SC = ({ t }) => {
+  const words: [string, string, number, number][] = [
+    ["STOP", "stop", 330, 0],
+    ["PAYING", "paying", 330, 1],
+    ["THE", "the", 460, 0],
+    ["MINIMUM", "minimum", 460, 1],
+  ];
+  const minAt = TW("minimum", 0);
+  const swing = 10 * Math.exp(-t * 1.2) * Math.cos(t * 6) - 6;
+  const punch = 1.12 - 0.12 * ease(t / 0.6);
+  return (
+    <g transform={`translate(540 860) scale(${punch}) translate(-540 -860)`}>
+      {/* title: every word bounces as it is spoken */}
+      {words.map(([w, key, y, k], n) => {
+        const at = n === 0 ? 0 : TW(key, 0);
+        const b = 1 + 0.25 * Math.max(0, 1 - Math.abs(t - at - 0.08) / 0.18);
+        const x = n === 0 ? 300 : n === 1 ? 700 : n === 2 ? 250 : 650;
+        return (
+          <g key={n} transform={`translate(${x} ${y - 30}) scale(${b}) translate(${-x} ${-(y - 30)})`}>
+            <Big x={x} y={y} text={w} color={k ? RED : INK} size={110} />
+          </g>
+        );
+      })}
+      <g transform={`translate(540 860) rotate(${swing}) translate(-540 -860)`}>
+        <CreditCard x={540} y={860} s={1.2} bal="$5,000" />
+      </g>
+      {/* money leaking out of the card, the whole time */}
+      {Array.from({ length: 10 }, (_, k) => {
+        const u = (t * 0.8 + k / 10) % 1;
+        const side = k % 2 ? 1 : -1;
+        const x = 540 + side * (60 + 420 * u) + 25 * Math.sin(t * 3 + k);
+        const y = 1080 + 120 * u + 160 * u * u;
+        return (
+          <g key={k} opacity={u < 0.75 ? 1 : (1 - u) / 0.25} transform={`translate(${x} ${y}) rotate(${side * u * 260 + k * 23}) scale(1.3)`}>
+            <rect x={-55} y={-28} width={110} height={56} rx={6} fill="#9fe0b8" stroke={INK} strokeWidth={4} />
+            <circle r={16} fill="none" stroke={INK} strokeWidth={3} />
+            <Txt x={0} y={12} size={30}>
+              $
+            </Txt>
+          </g>
+        );
+      })}
+      <Stamp x={540} y={1060} text="MINIMUM" t={t} at={minAt} size={80} rot={-10} />
+      <In t={t} at={TW("really", 0) - 0.2} dy={0} d={0.25}>
+        <Txt x={540} y={1270} size={56}>
+          WHAT IT REALLY COSTS
+        </Txt>
+      </In>
     </g>
-    <g transform={`translate(${Math.sin(t * 30) * 3 * clamp(1 - Math.abs(t - 1.2) / 0.4)} ${bob(t, 0, 6)})`}>
-      <CreditCard x={540} y={860} s={1.2} rot={-6} bal="$5,000" />
-    </g>
-    <In t={t} at={TW("really", 0) - 0.2} dy={0} d={0.25}>
-      <Txt x={540} y={1250} size={56}>
-        WHAT IT REALLY COSTS
-      </Txt>
-    </In>
-  </g>
-);
+  );
+};
 
 const S_Owe: SC = ({ t }) => {
   const a = T("You owe five");
