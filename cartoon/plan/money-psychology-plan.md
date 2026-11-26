@@ -3,8 +3,8 @@
 **Channel:** Coinflip Mind (@CoinflipMind). Scope: money psychology first (the main topic for now); general psychology
 videos later, only if the creator chooses. Description: "Your decisions are more random than you think."
 
-**Lane:** animated explainers on why people do what they do with money. Room to widen into general psychology later
-without changing the channel's name or look.
+**Lane:** animated explainers on money and personal finance only (creator decision, Nov 2026: no general-psychology
+videos; the brain science stays, but every topic is about money).
 
 **Rhythm:** one long video a week (8–10 min), plus three Shorts/Reels cut from each (each with its own fresh hook).
 
