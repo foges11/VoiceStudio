@@ -1098,7 +1098,7 @@ const Revenge: React.FC<{ t: number }> = ({ t }) => {
 
 // ------------------------------------------------------------------ sound
 type Sfx = "pop" | "tick" | "swoosh" | "tap" | "zap" | "ding" | "thud";
-const VOL: Record<Sfx, number> = { pop: 0.17, tick: 0.2, swoosh: 0.14, tap: 0.2, zap: 0.16, ding: 0.15, thud: 0.3 };
+const VOL: Record<Sfx, number> = { pop: 0.1, tick: 0.09, swoosh: 0.08, tap: 0.09, zap: 0.09, ding: 0.1, thud: 0.14 };
 const SFX: [number, Sfx][] = (() => {
   const ev: [number, Sfx][] = [];
   for (let i = 0; i < 12; i++) ev.push([i * 0.15, "tap"]);
@@ -1185,7 +1185,7 @@ export const GeoEp1: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
         <Confetti t={t} />
         <RuleCard t={t} />
       </svg>
-      {audio ? <Audio src={staticFile("geo/geo-ep1-vo.wav")} volume={0.9} /> : null}
+      {audio ? <Audio src={staticFile("geo/geo-ep1-vo.wav")} volume={1} /> : null}
       {audio
         ? SFX.map(([at, k], i) => (
             <Sequence key={i} from={Math.max(0, Math.round(at * GEO1_FPS))} durationInFrames={30}>
