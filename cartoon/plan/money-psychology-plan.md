@@ -3,8 +3,8 @@
 **Channel:** Coinflip Mind (@CoinflipMind). Scope: money psychology first (the main topic for now); general psychology
 videos later, only if the creator chooses. Description: "Your decisions are more random than you think."
 
-**Lane:** animated explainers on money and personal finance only (creator decision, Nov 2026: no general-psychology
-videos; the brain science stays, but every topic is about money).
+**Lane:** PIVOT (creator decision, Nov 28 2026): the channel is being rebranded to full GEOGRAPHY. Format: countries as
+characters with faces + a roasting host, elimination-style long-form videos (finance content is retired).
 
 **Rhythm:** one long video a week (8–10 min), plus three Shorts/Reels cut from each (each with its own fresh hook).
 
