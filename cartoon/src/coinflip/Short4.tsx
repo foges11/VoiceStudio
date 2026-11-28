@@ -27,7 +27,7 @@ const T = (p: string) => {
 type SC = React.FC<{ t: number }>;
 
 /** a stack of bills; h = number of layers */
-const Stack: React.FC<{ x: number; y: number; h: number; s?: number; tilt?: number }> = ({ x, y, h, s = 1, tilt = 0 }) => (
+export const Stack: React.FC<{ x: number; y: number; h: number; s?: number; tilt?: number }> = ({ x, y, h, s = 1, tilt = 0 }) => (
   <g transform={`translate(${x} ${y}) rotate(${tilt}) scale(${s})`}>
     <ellipse cx={0} cy={18} rx={150} ry={20} fill={INK} opacity={0.12} />
     {Array.from({ length: h }, (_, k) => (
@@ -39,7 +39,7 @@ const Stack: React.FC<{ x: number; y: number; h: number; s?: number; tilt?: numb
   </g>
 );
 
-const Crown: React.FC<{ x: number; y: number; s?: number }> = ({ x, y, s = 1 }) => (
+export const Crown: React.FC<{ x: number; y: number; s?: number }> = ({ x, y, s = 1 }) => (
   <path transform={`translate(${x} ${y}) scale(${s})`} d="M -70 0 L -70 -60 L -35 -25 L 0 -75 L 35 -25 L 70 -60 L 70 0 Z" fill={GOLD} stroke={INK} strokeWidth={6} strokeLinejoin="round" />
 );
 
