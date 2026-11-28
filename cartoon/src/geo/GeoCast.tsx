@@ -4,11 +4,11 @@ import React from "react";
 import { AbsoluteFill } from "remotion";
 import { useFonts } from "../inkbeat/core/frame";
 
-const INK = "#1b1f2e";
+export const INK = "#1b1f2e";
 const W = 7;
 
 /** each flag drawn into a 200×200 box centred at 0,0 (clipped to a circle by the head) */
-const FLAGS: Record<string, React.ReactNode> = {
+export const FLAGS: Record<string, React.ReactNode> = {
   USA: (
     <g>
       {Array.from({ length: 13 }, (_, i) => (
@@ -107,8 +107,8 @@ const FLAGS: Record<string, React.ReactNode> = {
   ),
 };
 
-type Mood = "smug" | "happy" | "scared" | "crying" | "angry" | "cool" | "shocked";
-const Face: React.FC<{ mood: Mood }> = ({ mood }) => {
+export type Mood = "smug" | "happy" | "scared" | "crying" | "angry" | "cool" | "shocked";
+export const Face: React.FC<{ mood: Mood }> = ({ mood }) => {
   const white = (cx: number) => <ellipse cx={cx} cy={-10} rx={22} ry={mood === "smug" ? 14 : 26} fill="#fff" stroke={INK} strokeWidth={5} />;
   const pupil = (cx: number, dy = 0) => <circle cx={cx} cy={-8 + dy} r={mood === "shocked" ? 7 : 10} fill={INK} />;
   return (
@@ -175,46 +175,46 @@ const Country: React.FC<{ x: number; y: number; s?: number; flag: string; mood: 
 };
 
 // props (drawn in head space, head radius 100)
-const Cowboy = (
+export const Cowboy = (
   <g>
     <ellipse cx={0} cy={-90} rx={130} ry={22} fill="#8b5a2b" stroke={INK} strokeWidth={6} />
     <path d="M -62 -92 Q -60 -170 0 -160 Q 60 -170 62 -92 Z" fill="#a0692e" stroke={INK} strokeWidth={6} />
   </g>
 );
-const Toque = (
+export const Toque = (
   <g>
     <path d="M -84 -60 Q -80 -150 0 -150 Q 80 -150 84 -60 Z" fill="#d52b1e" stroke={INK} strokeWidth={6} />
     <rect x={-90} y={-72} width={180} height={30} rx={12} fill="#fff" stroke={INK} strokeWidth={6} />
     <circle cx={0} cy={-158} r={22} fill="#fff" stroke={INK} strokeWidth={6} />
   </g>
 );
-const Ushanka = (
+export const Ushanka = (
   <g>
     <path d="M -92 -40 Q -96 -140 0 -142 Q 96 -140 92 -40 Z" fill="#6b4a2f" stroke={INK} strokeWidth={6} />
     <rect x={-100} y={-70} width={200} height={34} rx={14} fill="#8a6a4a" stroke={INK} strokeWidth={6} />
   </g>
 );
-const PartyHat = (
+export const PartyHat = (
   <g>
     <path d="M -36 -88 L 0 -190 L 36 -88 Z" fill="#ff4fa3" stroke={INK} strokeWidth={6} />
     <circle cx={0} cy={-194} r={14} fill="#ffdf00" stroke={INK} strokeWidth={5} />
   </g>
 );
-const TopHat = (
+export const TopHat = (
   <g>
     <rect x={-80} y={-108} width={160} height={20} rx={8} fill={INK} />
     <rect x={-52} y={-200} width={104} height={96} rx={8} fill={INK} />
     <rect x={-52} y={-130} width={104} height={14} fill="#c8102e" />
   </g>
 );
-const Beret = <ellipse cx={-10} cy={-96} rx={78} ry={30} fill={INK} transform="rotate(-10 -10 -96)" />;
-const Headband = (
+export const Beret = <ellipse cx={-10} cy={-96} rx={78} ry={30} fill={INK} transform="rotate(-10 -10 -96)" />;
+export const Headband = (
   <g>
     <rect x={-100} y={-62} width={200} height={26} fill="#fff" stroke={INK} strokeWidth={5} />
     <circle cx={0} cy={-49} r={9} fill="#bc002d" />
   </g>
 );
-const CorkHat = (
+export const CorkHat = (
   <g>
     <ellipse cx={0} cy={-86} rx={120} ry={20} fill="#c9a26b" stroke={INK} strokeWidth={6} />
     <path d="M -60 -88 Q -56 -150 0 -146 Q 56 -150 60 -88 Z" fill="#d8b47a" stroke={INK} strokeWidth={6} />
@@ -226,16 +226,22 @@ const CorkHat = (
     ))}
   </g>
 );
-const Clipboard = (
+export const Clipboard = (
   <g transform="translate(110 70) rotate(12)">
     <rect x={-34} y={-44} width={68} height={88} rx={8} fill="#c98a12" stroke={INK} strokeWidth={4} />
     <rect x={-24} y={-32} width={48} height={66} fill="#fff" />
   </g>
 );
-const Halo = <ellipse cx={0} cy={-128} rx={56} ry={14} fill="none" stroke="#f5c518" strokeWidth={9} />;
+export const ChefHat = (
+  <g>
+    <rect x={-56} y={-118} width={112} height={34} rx={6} fill="#fff" stroke={INK} strokeWidth={6} />
+    <path d="M -60 -112 Q -100 -150 -60 -180 Q -40 -220 0 -196 Q 40 -220 60 -180 Q 100 -150 60 -112 Z" fill="#fff" stroke={INK} strokeWidth={6} />
+  </g>
+);
+export const Halo = <ellipse cx={0} cy={-128} rx={56} ry={14} fill="none" stroke="#f5c518" strokeWidth={9} />;
 
 /** the host: a globe with a bow tie and a microphone */
-const Host: React.FC<{ x: number; y: number; s?: number }> = ({ x, y, s = 1 }) => (
+export const Host: React.FC<{ x: number; y: number; s?: number; talk?: number; label?: boolean; eq?: number }> = ({ x, y, s = 1, talk = 0, label = true, eq = 0 }) => (
   <g transform={`translate(${x} ${y}) scale(${s})`}>
     <ellipse cx={0} cy={240} rx={130} ry={20} fill={INK} opacity={0.15} />
     <path d="M -34 130 L -42 236 M 34 130 L 42 236" stroke={INK} strokeWidth={12} strokeLinecap="round" />
@@ -258,16 +264,25 @@ const Host: React.FC<{ x: number; y: number; s?: number }> = ({ x, y, s = 1 }) =
     <circle cx={-34} cy={-2} r={13} fill={INK} />
     <circle cx={50} cy={-2} r={13} fill={INK} />
     <path d="M -76 -52 L -16 -46 M 16 -46 L 76 -52" stroke={INK} strokeWidth={8} strokeLinecap="round" />
-    <path d="M -40 56 Q 0 92 44 50" fill="#fff" stroke={INK} strokeWidth={7} strokeLinejoin="round" />
+    {talk > 0.12 ? (
+      <path d={`M -40 52 Q 0 ${70 + 40 * talk} 44 48 Q 2 ${58 - 4 * talk} -40 52 Z`} fill="#7a1f2b" stroke={INK} strokeWidth={7} strokeLinejoin="round" />
+    ) : (
+      <path d="M -40 56 Q 0 92 44 50" fill="#fff" stroke={INK} strokeWidth={7} strokeLinejoin="round" />
+    )}
+    {eq > 0 ? <path d="M -140 18 Q 0 52 140 18" fill="none" stroke="#e8423a" strokeWidth={9} strokeDasharray="22 14" strokeLinecap="round" opacity={eq} /> : null}
     {/* bow tie */}
     <path d="M 0 136 L -50 110 L -50 162 Z M 0 136 L 50 110 L 50 162 Z" fill="#e85d4a" stroke={INK} strokeWidth={5} strokeLinejoin="round" />
     <circle cy={136} r={12} fill="#e85d4a" stroke={INK} strokeWidth={5} />
-    <text y={320} textAnchor="middle" fontFamily="Poppins" fontWeight={800} fontSize={48} fill={INK}>
-      THE HOST
-    </text>
-    <text y={360} textAnchor="middle" fontFamily="Poppins" fontWeight={700} fontSize={26} fill="#6b7280">
-      announces the rules, roasts the losers
-    </text>
+    {label ? (
+      <g>
+        <text y={320} textAnchor="middle" fontFamily="Poppins" fontWeight={800} fontSize={48} fill={INK}>
+          THE HOST
+        </text>
+        <text y={360} textAnchor="middle" fontFamily="Poppins" fontWeight={700} fontSize={26} fill="#6b7280">
+          announces the rules, roasts the losers
+        </text>
+      </g>
+    ) : null}
   </g>
 );
 
