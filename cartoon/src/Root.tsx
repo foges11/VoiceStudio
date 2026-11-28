@@ -20,6 +20,7 @@ import { IC_FRAMES, InstaCard } from "./coinflip/InstaCard";
 import { SH1_FPS, SH1_FRAMES, Short1 } from "./coinflip/Short1";
 import { SH2_FPS, SH2_FRAMES, Short2 } from "./coinflip/Short2";
 import { SH3_FPS, SH3_FRAMES, Short3 } from "./coinflip/Short3";
+import { SH4_FPS, SH4_FRAMES, Short4 } from "./coinflip/Short4";
 import { Ep1, EP1_FPS, EP1_FRAMES } from "./coinflip/Ep1";
 import { EP1T_FPS, EP1T_FRAMES, Ep1Test } from "./coinflip/Ep1Test";
 import { MobvilleLook } from "./mob/MobvilleLook";
@@ -67,6 +68,7 @@ export const Root: React.FC = () => (
     ))}
     <Composition id="CoinflipShort2" component={Short2} durationInFrames={SH2_FRAMES} fps={SH2_FPS} width={1080} height={1920} defaultProps={{ audio: true, captions: true }} />
     <Composition id="CoinflipShort3" component={Short3} durationInFrames={SH3_FRAMES} fps={SH3_FPS} width={1080} height={1920} defaultProps={{ audio: true, captions: true }} />
+    <Composition id="CoinflipShort4" component={Short4} durationInFrames={SH4_FRAMES} fps={SH4_FPS} width={1080} height={1920} defaultProps={{ audio: true, captions: true }} />
     <Composition id="CoinflipEp1Test" component={Ep1Test} durationInFrames={EP1T_FRAMES} fps={EP1T_FPS} width={1920} height={1080} />
     {[0, 1, 2, 3].map((v) => (
       <Composition key={v} id={`CoinflipAvatar-${v}`} component={CoinflipAvatar} durationInFrames={1} fps={30} width={1080} height={1080} defaultProps={{ v }} />
