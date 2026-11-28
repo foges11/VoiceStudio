@@ -454,7 +454,7 @@ const Hook: React.FC<{ t: number }> = ({ t }) => {
 };
 
 // ------------------------------------------------------------------ the world map
-type WCountry = { n: string; g: string; d: string; b: number[] };
+type WCountry = { n: string; g: string; d: string; lo: string; b: number[] };
 const WC = WORLD.c as WCountry[];
 const PINS = WORLD.pins as Record<string, number[]>;
 const ATLAS: Record<string, string> = { USA: "United States of America", CANADA: "Canada", RUSSIA: "Russia", BRAZIL: "Brazil", UK: "United Kingdom", FRANCE: "France", JAPAN: "Japan", AUSTRALIA: "Australia", ITALY: "Italy", GERMANY: "Germany", VATICAN: "Vatican" };
@@ -547,9 +547,9 @@ const MapView: React.FC<{ t: number; cam: Cam }> = ({ t, cam }) => {
       <rect x={0} y={0} width={1920} height={1080} fill="#2a6fb0" />
       <g transform={`translate(960 540) scale(${cam.z}) translate(${-cam.cx} ${-cam.cy})`}>
         {WC.map((c, i) => (
-          <path key={i} d={c.d} fill={fillOf(c, t)} stroke={INK} strokeWidth={1.4} vectorEffect="non-scaling-stroke" strokeLinejoin="round" />
+          <path key={i} d={cam.z < 2.5 ? c.lo : c.d} fill={fillOf(c, t)} stroke={INK} strokeWidth={1.4 * inv} strokeLinejoin="round" />
         ))}
-        {eq > 0 ? <path d={`M ${WORLD.x0} ${WORLD.eq} L ${WORLD.x1 * eq + WORLD.x0 * (1 - eq)} ${WORLD.eq}`} stroke={RED} strokeWidth={5} strokeDasharray="18 10" vectorEffect="non-scaling-stroke" /> : null}
+        {eq > 0 ? <path d={`M ${WORLD.x0} ${WORLD.eq} L ${WORLD.x1 * eq + WORLD.x0 * (1 - eq)} ${WORLD.eq}`} stroke={RED} strokeWidth={5 * inv} strokeDasharray={`${18 * inv} ${10 * inv}`} /> : null}
         {pinsOn
           ? ORDER.map((k) => {
               const o = OUT[k];
@@ -572,10 +572,10 @@ const MapView: React.FC<{ t: number; cam: Cam }> = ({ t, cam }) => {
             })
           : null}
         {t > C.martin - 0.3 && t < C.frWins ? (
-          <circle cx={PINS.STMARTIN[0]} cy={PINS.STMARTIN[1]} r={26 * inv * (1 + 0.15 * Math.sin(t * 8))} fill="none" stroke={GOLD} strokeWidth={6} vectorEffect="non-scaling-stroke" />
+          <circle cx={PINS.STMARTIN[0]} cy={PINS.STMARTIN[1]} r={26 * inv * (1 + 0.15 * Math.sin(t * 8))} fill="none" stroke={GOLD} strokeWidth={6 * inv} />
         ) : null}
         {t > C.ni - 0.3 && t < C.survives + 1 ? (
-          <circle cx={PINS.IRELAND[0] + 6} cy={PINS.IRELAND[1] - 3} r={9 * (1 + 0.15 * Math.sin(t * 8))} fill="none" stroke={GOLD} strokeWidth={6} vectorEffect="non-scaling-stroke" />
+          <circle cx={PINS.IRELAND[0] + 6} cy={PINS.IRELAND[1] - 3} r={9 * (1 + 0.15 * Math.sin(t * 8))} fill="none" stroke={GOLD} strokeWidth={6 * inv} />
         ) : null}
       </g>
     </g>
@@ -957,7 +957,7 @@ const Counters: React.FC<{ t: number }> = ({ t }) => {
         const kick = 1 + 0.25 * clamp(1 - (t - last) / 0.2);
         const win = k === "FRANCE" && t >= C.frWins;
         return (
-          <g key={k} transform={`translate(${p.x} ${p.y - 175 * p.s - (k === "FRANCE" && t >= C.frWins ? 60 : 0)}) scale(${p.s * kick})`}>
+          <g key={k} transform={`translate(${p.x} ${p.y - 265 * p.s}) scale(${p.s * kick})`}>
             <circle r={58} fill={win ? GOLD : "#fff"} stroke={INK} strokeWidth={7} />
             <text y={26} textAnchor="middle" fontFamily="Poppins" fontWeight={800} fontSize={72} fill={INK}>
               {c}
